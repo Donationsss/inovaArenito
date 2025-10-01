@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>To-Do</title>
+<style>body{font-family:system-ui;background:#121216;color:#fff;padding:20px} .box{max-width:420px;margin:auto} input{padding:8px;width:100%} ul{margin-top:12px} li{background:#1e1e25;padding:8px;margin:6px 0;border-radius:8px;display:flex;justify-content:space-between}</style>
+</head>
+<body>
+  <div class="box">
+    <h3>To-Do</h3>
+    <input id="task" placeholder="Nova tarefa" />
+    <button onclick="add()">Adicionar</button>
+    <ul id="list"></ul>
+  </div>
+<script>
+  function add(){
+    const v=document.getElementById('task').value.trim();
+    if(!v) return;
+    const li=document.createElement('li');
+    li.innerHTML = `<span>${v}</span><button onclick="this.parentElement.remove()">Remover</button>`;
+    document.getElementById('list').appendChild(li);
+    document.getElementById('task').value='';
+  }
+</script>
+</body>
+</html>

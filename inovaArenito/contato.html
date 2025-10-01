@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contato | Meu Portfólio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand"><h1 class="logo">Meu<span>Portfólio</span></h1></div>
+    <nav class="nav-actions">
+      <a href="index.html" class="nav-link">Início</a>
+      <button id="themeToggleContact" class="icon-btn" title="Alternar tema">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container contato-page">
+    <h2>Contato</h2>
+
+    <form id="contactForm" method="post" action="send_email.php" enctype="multipart/form-data" novalidate>
+      <input id="contNome" name="nome" type="text" placeholder="Seu nome" required>
+      <input id="contEmail" name="email" type="email" placeholder="Seu email" required>
+      <input id="contAssunto" name="assunto" type="text" placeholder="Assunto" required>
+      <textarea id="contMensagem" name="mensagem" rows="6" placeholder="Sua mensagem..." required></textarea>
+
+      <label class="file-label">Anexo (opcional)
+        <input id="contAnexo" name="anexo" type="file" accept=".png,.jpg,.jpeg,.pdf,.zip,.txt">
+      </label>
+
+      <input type="hidden" name="csrf_token" id="csrfTokenField" value="">
+
+      <div class="form-actions">
+        <button type="submit" id="btnEnviar" class="btn">
+          <span class="btn-text">Enviar</span>
+          <span class="spinner" id="sendSpinner"></span>
+        </button>
+        <button type="button" id="verMensagens" class="btn ghost">Ver mensagens (local)</button>
+      </div>
+    </form>
+
+    <div id="mensagensList" class="mensagens-list"></div>
+  </main>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

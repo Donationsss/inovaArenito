@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfólio | Meu Perfil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <h1 class="logo">Meu<span>Portfólio</span></h1>
+    </div>
+    <nav class="nav-actions">
+      <a href="setup.html" class="nav-link">Editar Perfil</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+      <button id="themeToggle" class="icon-btn" title="Alternar tema">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-card" id="heroCard">
+        <div class="perfil-left">
+          <img id="perfilFoto" class="perfil-img" alt="Foto do perfil" src="">
+        </div>
+        <div class="perfil-right">
+          <h2 id="nomeUser">Seu Nome</h2>
+          <p class="titulo" id="tituloUser">Título Profissional</p>
+          <p class="descricao" id="descricaoDinamica"></p>
+          <div class="hero-cta">
+            <a href="#projetos" class="btn">Ver Projetos</a>
+            <a href="contato.html" class="btn ghost">Contato</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos" class="projetos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Mini-Projetos</h2>
+          <div>
+            <button id="btnAddProjeto" class="btn">+ Adicionar Projeto</button>
+          </div>
+        </div>
+
+        <div id="projetosGrid" class="grid projetos-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal adicionar projeto -->
+  <div id="modalAdd" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3>Adicionar Projeto</h3>
+
+      <div class="modal-section">
+        <h4>Importar do GitHub</h4>
+        <input id="ghUserInput" type="text" placeholder="Nome de usuário GitHub (ex: octocat)">
+        <button id="ghFetchBtn" class="btn small">Buscar Repositório</button>
+        <div id="ghResults" class="gh-results"></div>
+      </div>
+
+      <hr>
+
+      <div class="modal-section">
+        <h4>Enviar arquivo do PC</h4>
+        <input id="projFileInput" type="file" accept=".html,.zip,.png,.jpg,.gif" style="display:none">
+        <label for="projFileInput" class="file-btn">Escolher arquivo</label>
+      </div>
+
+      <hr>
+
+      <div class="modal-section">
+        <h4>Criar manualmente</h4>
+        <input id="projNameInput" type="text" placeholder="Nome do projeto">
+        <input id="projLinkInput" type="text" placeholder="Link (URL) do projeto">
+        <button id="projCreateBtn" class="btn small">Criar Projeto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmação -->
+  <div id="confirmModal" class="confirm-modal" aria-hidden="true">
+    <div class="confirm-body">
+      <h3>Confirmar remoção</h3>
+      <p>Tem certeza que deseja remover este projeto?</p>
+      <div class="confirm-actions">
+        <button id="confirmYes" class="btn">Sim, remover</button>
+        <button id="confirmNo" class="btn ghost">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> - Meu Portfólio</p>
+  </footer>
+
+  <!-- Toasts -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

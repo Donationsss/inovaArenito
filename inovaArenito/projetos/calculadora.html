@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora</title>
+<style>
+  body{display:flex;align-items:center;justify-content:center;height:100vh;background:#111;color:#fff;font-family:system-ui}
+  .calc{background:#1f1f25;padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+  input{width:220px;padding:10px;border-radius:8px;border:none;margin-bottom:8px}
+  button{padding:10px;border-radius:8px;border:none;background:#1e90ff;color:#fff;cursor:pointer}
+</style>
+</head>
+<body>
+  <div class="calc">
+    <input id="expr" placeholder="Ex: 2+2*3" />
+    <div style="display:flex;gap:8px">
+      <button onclick="calc()">Calcular</button>
+      <button onclick="document.getElementById('expr').value=''">Limpar</button>
+    </div>
+    <p id="out"></p>
+  </div>
+<script>
+  function calc(){
+    try{
+      const v = eval(document.getElementById('expr').value);
+      document.getElementById('out').textContent = 'Resultado: ' + v;
+    }catch(e){document.getElementById('out').textContent='Erro na expressão'}
+  }
+</script>
+</body>
+</html>

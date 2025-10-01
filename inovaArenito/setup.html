@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Setup | Meu Portfólio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+  <main class="setup-page">
+    <div class="setup-card" data-aos="zoom-in">
+      <h1>Configurar seu Portfólio</h1>
+
+      <!-- FOTO: círculo único (input escondido) -->
+      <div id="fotoWrapper" class="foto-upload" title="Clique para adicionar imagem/gif">
+        <div class="foto-circle"><span>+</span></div>
+        <input id="fotoInput" type="file" accept="image/*" />
+      </div>
+
+      <label for="nomeInput">Nome</label>
+      <input id="nomeInput" type="text" placeholder="Seu nome" />
+
+      <label for="tituloInput">Título profissional</label>
+      <input id="tituloInput" type="text" placeholder="Ex: Desenvolvedor Full Stack" />
+
+      <label for="descricaoInput">Descrição</label>
+      <textarea id="descricaoInput" rows="4" placeholder="Curta descrição dinâmica..."></textarea>
+
+      <div class="setup-actions">
+        <button id="salvarPerfil" class="btn">Salvar e Ir para o Portfólio</button>
+        <a href="index.html" class="btn ghost">Pular (ver portfólio)</a>
+      </div>
+      <small class="muted">Aceita GIF / PNG / JPG. A imagem é salva localmente no navegador.</small>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="setup.js"></script>
+  <script> AOS.init(); </script>
+</body>
+</html>

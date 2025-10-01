@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relógio</title>
+<style>body{display:flex;align-items:center;justify-content:center;height:100vh;background:#0b1014;color:#1e90ff;font-family:monospace} .clock{font-size:48px;background:rgba(255,255,255,0.03);padding:20px;border-radius:12px}</style>
+</head>
+<body>
+  <div class="clock" id="c"></div>
+<script>
+  function tick(){ const d=new Date(); document.getElementById('c').textContent = d.toLocaleTimeString(); }
+  setInterval(tick,1000); tick();
+</script>
+</body>
+</html>
