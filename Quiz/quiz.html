@@ -1,0 +1,57 @@
+<!-- quiz.html -->
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogo — QuizNova</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+  <style>
+    .quiz-wrap{ max-width:860px; margin:0 auto; padding:32px 0; }
+    .question-card{ position:relative; border:1px solid var(--stroke-700); border-radius:16px; padding:24px; background:linear-gradient(180deg,var(--card-800),var(--bg-700)); box-shadow:var(--shadow-2); }
+    .answers{ margin-top:16px; display:grid; gap:12px; }
+    .answer{ padding:12px 14px; border-radius:12px; border:1px solid var(--stroke-700); cursor:pointer; background:#121828; transition:background .2s ease, border-color .2s ease, transform .08s ease; }
+    .answer:hover{ background:#172033; }
+    .answer.correct{ border-color: rgba(55,214,122,0.6); background: rgba(55,214,122,0.12); }
+    .answer.wrong{ border-color: rgba(255,93,93,0.6); background: rgba(255,93,93,0.12); }
+    .score-toast{ position: absolute; right: 16px; top: 16px; background:#0c1018; border:1px solid var(--stroke-700); border-radius:10px; padding:6px 10px; box-shadow:var(--shadow-2); }
+    /* Timer circular */
+    .timer{ position:absolute; right:16px; bottom:16px; width:72px; height:72px; }
+    .timer svg{ transform: rotate(-90deg); }
+    .timer .bg{ stroke: #25314a; stroke-width:10; fill:none; }
+    .timer .fg{ stroke: var(--primary-600); stroke-width:10; fill:none; stroke-linecap: round; transition: stroke-dashoffset .2s linear; }
+    .timer .label{ position:absolute; inset:0; display:grid; place-items:center; font-size:0.9rem; color:var(--text-300); }
+  </style>
+</head>
+<body>
+  <header>...</header>
+  <main class="container quiz-wrap">
+    <div id="quiz-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+      <div>
+        <h2 id="quiz-title">Quiz</h2>
+        <div class="muted" id="quiz-meta">12 questões • 60s cada</div>
+      </div>
+      <div class="score-toast" id="score-live" aria-live="polite">Score: 0</div>
+    </div>
+
+    <section class="question-card">
+      <div id="q-text">Carregando pergunta...</div>
+      <div class="answers" id="answers"></div>
+
+      <div class="timer" aria-label="Tempo restante">
+        <svg viewBox="0 0 100 100">
+          <circle class="bg" cx="50" cy="50" r="44"></circle>
+          <circle class="fg" cx="50" cy="50" r="44" stroke-dasharray="276" stroke-dashoffset="0"></circle>
+        </svg>
+        <div class="label" id="time-label">60</div>
+      </div>
+    </section>
+
+    <div style="display:flex; justify-content:space-between; margin-top:16px;">
+      <div class="muted"><span id="q-index">1</span>/12</div>
+      <button class="btn btn-primary" id="next-btn" disabled>Próxima</button>
+    </div>
+  </main>
+  <script src="./js/quiz.js"></script>
+</body>
+</html>

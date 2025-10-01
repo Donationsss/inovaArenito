@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QuizNova — Plataforma de Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Animate.css CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="logo"></div>
+          <h1>QuizNova</h1>
+        </div>
+        <nav class="nav-actions">
+          <button class="btn btn-ghost">Explorar</button>
+          <button class="btn btn-ghost">Categorias</button>
+          <button class="btn btn-primary">Entrar</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <h2 class="animate__animated animate__fadeInUp">
+            Aprenda jogando com quizzes dinâmicos
+          </h2>
+          <p class="animate__animated animate__fadeInUp animate__delay-1s">
+            Partidas ao vivo, rankings, conquistas e relatórios visuais em uma
+            experiência fluida no modo escuro com alto contraste e
+            microinterações elegantes.
+          </p>
+          <div
+            class="animate__animated animate__fadeInUp animate__delay-2s hero-cta"
+          >
+            <button class="btn btn-primary">Começar agora</button>
+            <button class="btn btn-ghost">Ver categorias</button>
+          </div>
+        </div>
+        <div class="hero-card animate__animated animate__fadeIn">
+          <!-- Dentro do hero-card no index.html -->
+          <div class="tabs" role="tablist" aria-label="Progresso">
+            <button
+              class="tab active"
+              role="tab"
+              aria-selected="true"
+              data-tab="daily"
+            >
+              Diário
+            </button>
+            <button
+              class="tab"
+              role="tab"
+              aria-selected="false"
+              data-tab="weekly"
+            >
+              Semanal
+            </button>
+          </div>
+
+          <div id="panel-daily" role="tabpanel">
+            <div class="progress">
+              <span id="daily-bar" style="width: 0%"></span>
+            </div>
+            <ul class="stats">
+              <li id="daily-quizzes">Quizzes: 0</li>
+              <li id="daily-accuracy">Acertos: 0%</li>
+              <li id="daily-points">Pontos: 0</li>
+            </ul>
+          </div>
+
+          <div id="panel-weekly" role="tabpanel" hidden>
+            <div class="progress">
+              <span id="weekly-bar" style="width: 0%"></span>
+            </div>
+            <ul class="stats">
+              <li id="weekly-quizzes">Quizzes: 0</li>
+              <li id="weekly-accuracy">Acertos: 0%</li>
+              <li id="weekly-points">Pontos: 0</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="filters">
+        <button class="chip active">Todos</button>
+        <button class="chip">Matemática</button>
+        <button class="chip">Ciências</button>
+        <button class="chip">História</button>
+        <button class="chip">Geografia</button>
+        <button class="chip">Programação</button>
+      </section>
+
+      <section class="grid" id="quiz-grid">
+        <article class="quiz-card animate__animated animate__fadeInUp">
+          <div class="quiz-thumb"></div>
+          <div class="quiz-body">
+            <h3 class="quiz-title">Fundamentos de Matemática</h3>
+            <div class="quiz-meta">
+              <span>20 questões</span>
+              <span>Intermediário</span>
+              <span>⭐ 4.7</span>
+            </div>
+            <div class="quiz-actions">
+              <button class="btn btn-primary">Jogar</button>
+              <button class="btn btn-ghost">Detalhes</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="quiz-card animate__animated animate__fadeInUp">
+          <div class="quiz-thumb variant-1"></div>
+          <div class="quiz-body">
+            <h3 class="quiz-title">Ciências — Biologia</h3>
+            <div class="quiz-meta">
+              <span>15 questões</span>
+              <span>Fácil</span>
+              <span>⭐ 4.5</span>
+            </div>
+            <div class="quiz-actions">
+              <button class="btn btn-primary">Jogar</button>
+              <button class="btn btn-ghost">Detalhes</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="quiz-card animate__animated animate__fadeInUp">
+          <div class="quiz-thumb variant-2"></div>
+          <div class="quiz-body">
+            <h3 class="quiz-title">História do Brasil</h3>
+            <div class="quiz-meta">
+              <span>25 questões</span>
+              <span>Avançado</span>
+              <span>⭐ 4.8</span>
+            </div>
+            <div class="quiz-actions">
+              <button class="btn btn-primary">Jogar</button>
+              <button class="btn btn-ghost">Detalhes</button>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div class="toast animate__animated animate__fadeInUp" id="toast">
+      Novo quiz disponível em Programação!
+    </div>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>

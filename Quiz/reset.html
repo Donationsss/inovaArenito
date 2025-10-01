@@ -1,0 +1,51 @@
+<!-- reset.html (solicitar código e redefinição) -->
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redefinir senha — QuizNova</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <main class="container" style="max-width:560px; padding:48px 0;">
+    <h2>Redefinir senha</h2>
+
+    <!-- Passo 1: solicitar email -->
+    <section class="card" id="step-email">
+      <h3>Receber código por e-mail</h3>
+      <form id="form-forgot" novalidate aria-describedby="forgot-errors">
+        <div class="form-group">
+          <label for="forgot_email">E-mail da conta</label>
+          <input id="forgot_email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div id="forgot-errors" class="error" aria-live="polite"></div>
+        <button class="btn btn-primary" type="submit">Enviar código</button>
+      </form>
+    </section>
+
+    <!-- Passo 2: validar código e nova senha -->
+    <section class="card" id="step-reset" style="display:none; margin-top:16px;">
+      <h3>Inserir código e nova senha</h3>
+      <form id="form-reset" novalidate aria-describedby="reset-errors">
+        <input type="hidden" id="reset_email" name="email" />
+        <div class="form-group">
+          <label for="code">Código recebido</label>
+          <input id="code" name="code" type="text" inputmode="numeric" minlength="6" maxlength="8" required />
+        </div>
+        <div class="form-group">
+          <label for="new_password">Nova senha</label>
+          <input id="new_password" name="new_password" type="password" autocomplete="new-password" minlength="8" required />
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirmar nova senha</label>
+          <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required />
+        </div>
+        <div id="reset-errors" class="error" aria-live="polite"></div>
+        <button class="btn btn-primary" type="submit">Redefinir</button>
+      </form>
+    </section>
+  </main>
+  <script src="./js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- categoria.html -->
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quizzes — QuizNova</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header>...</header>
+  <main class="container" style="display:grid; grid-template-columns:280px 1fr; gap:24px; padding:32px 0;">
+    <aside class="card" aria-label="Categorias">
+      <h3>Categorias</h3>
+      <nav id="cat-list"></nav>
+      <button id="clear-filter" class="btn btn-ghost" style="margin-top:12px;">Limpar filtro</button>
+    </aside>
+    <section>
+      <div class="grid" id="all-quizzes"></div>
+    </section>
+  </main>
+  <script src="./js/catalog.js"></script>
+</body>
+</html>

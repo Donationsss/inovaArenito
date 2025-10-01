@@ -1,0 +1,40 @@
+<!-- login.html -->
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Entrar — QuizNova</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <main class="container" style="max-width:520px; padding:48px 0;">
+    <h2>Entrar</h2>
+    <form id="form-login" novalidate aria-describedby="login-errors">
+      <div class="form-group">
+        <label for="username">Nome de usuário</label>
+        <input id="username" name="username" type="text" autocomplete="username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+      </div>
+
+      <div class="form-group" style="display:flex; align-items:center; gap:8px;">
+        <input id="remember" name="remember" type="checkbox" />
+        <label for="remember">Lembrar de mim</label>
+      </div>
+
+      <div id="login-errors" class="error" aria-live="polite"></div>
+
+      <div style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" type="submit">Entrar</button>
+        <a class="btn btn-ghost" href="./register.html">Não tem conta? Cadastre-se</a>
+        <a class="btn btn-ghost" href="./reset.html">Esqueceu a senha?</a>
+      </div>
+    </form>
+  </main>
+  <script src="./js/auth.js"></script>
+</body>
+</html>
