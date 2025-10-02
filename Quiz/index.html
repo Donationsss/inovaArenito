@@ -1,163 +1,172 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>QuizNova — Plataforma de Quiz</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Animate.css CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-  <body>
-    <header>
-      <div class="container nav">
-        <div class="brand">
-          <div class="logo"></div>
-          <h1>QuizNova</h1>
-        </div>
-        <nav class="nav-actions">
-          <button class="btn btn-ghost">Explorar</button>
-          <button class="btn btn-ghost">Categorias</button>
-          <button class="btn btn-primary">Entrar</button>
-        </nav>
-      </div>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Master — Interativo</title>
 
-    <main class="container">
-      <section class="hero">
-        <div>
-          <h2 class="animate__animated animate__fadeInUp">
-            Aprenda jogando com quizzes dinâmicos
-          </h2>
-          <p class="animate__animated animate__fadeInUp animate__delay-1s">
-            Partidas ao vivo, rankings, conquistas e relatórios visuais em uma
-            experiência fluida no modo escuro com alto contraste e
-            microinterações elegantes.
-          </p>
-          <div
-            class="animate__animated animate__fadeInUp animate__delay-2s hero-cta"
-          >
-            <button class="btn btn-primary">Começar agora</button>
-            <button class="btn btn-ghost">Ver categorias</button>
-          </div>
-        </div>
-        <div class="hero-card animate__animated animate__fadeIn">
-          <!-- Dentro do hero-card no index.html -->
-          <div class="tabs" role="tablist" aria-label="Progresso">
-            <button
-              class="tab active"
-              role="tab"
-              aria-selected="true"
-              data-tab="daily"
-            >
-              Diário
-            </button>
-            <button
-              class="tab"
-              role="tab"
-              aria-selected="false"
-              data-tab="weekly"
-            >
-              Semanal
-            </button>
-          </div>
+  <!-- Tipografia -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
 
-          <div id="panel-daily" role="tabpanel">
-            <div class="progress">
-              <span id="daily-bar" style="width: 0%"></span>
-            </div>
-            <ul class="stats">
-              <li id="daily-quizzes">Quizzes: 0</li>
-              <li id="daily-accuracy">Acertos: 0%</li>
-              <li id="daily-points">Pontos: 0</li>
-            </ul>
-          </div>
+  <!-- AOS Animation (CDN) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-          <div id="panel-weekly" role="tabpanel" hidden>
-            <div class="progress">
-              <span id="weekly-bar" style="width: 0%"></span>
-            </div>
-            <ul class="stats">
-              <li id="weekly-quizzes">Quizzes: 0</li>
-              <li id="weekly-accuracy">Acertos: 0%</li>
-              <li id="weekly-points">Pontos: 0</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+  <!-- styles -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- Fundo animado e noise -->
+  <div class="bg-animated"></div>
+  <div class="bg-noise"></div>
 
-      <section class="filters">
-        <button class="chip active">Todos</button>
-        <button class="chip">Matemática</button>
-        <button class="chip">Ciências</button>
-        <button class="chip">História</button>
-        <button class="chip">Geografia</button>
-        <button class="chip">Programação</button>
-      </section>
-
-      <section class="grid" id="quiz-grid">
-        <article class="quiz-card animate__animated animate__fadeInUp">
-          <div class="quiz-thumb"></div>
-          <div class="quiz-body">
-            <h3 class="quiz-title">Fundamentos de Matemática</h3>
-            <div class="quiz-meta">
-              <span>20 questões</span>
-              <span>Intermediário</span>
-              <span>⭐ 4.7</span>
-            </div>
-            <div class="quiz-actions">
-              <button class="btn btn-primary">Jogar</button>
-              <button class="btn btn-ghost">Detalhes</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="quiz-card animate__animated animate__fadeInUp">
-          <div class="quiz-thumb variant-1"></div>
-          <div class="quiz-body">
-            <h3 class="quiz-title">Ciências — Biologia</h3>
-            <div class="quiz-meta">
-              <span>15 questões</span>
-              <span>Fácil</span>
-              <span>⭐ 4.5</span>
-            </div>
-            <div class="quiz-actions">
-              <button class="btn btn-primary">Jogar</button>
-              <button class="btn btn-ghost">Detalhes</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="quiz-card animate__animated animate__fadeInUp">
-          <div class="quiz-thumb variant-2"></div>
-          <div class="quiz-body">
-            <h3 class="quiz-title">História do Brasil</h3>
-            <div class="quiz-meta">
-              <span>25 questões</span>
-              <span>Avançado</span>
-              <span>⭐ 4.8</span>
-            </div>
-            <div class="quiz-actions">
-              <button class="btn btn-primary">Jogar</button>
-              <button class="btn btn-ghost">Detalhes</button>
-            </div>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <div class="toast animate__animated animate__fadeInUp" id="toast">
-      Novo quiz disponível em Programação!
+  <header class="topbar" role="banner">
+    <div class="container">
+      <h1 class="brand" aria-label="Quiz Master">Quiz Master</h1>
+      <nav class="actions" aria-label="Atalhos">
+        <button class="btn ghost" id="btn-go-home" aria-controls="screen-home" aria-label="Ir para início">Início</button>
+      </nav>
     </div>
+  </header>
 
-    <script src="./js/app.js"></script>
-  </body>
+  <main id="app" role="main">
+    <!-- Tela Inicial (menu de jogo com ícones + histórico quando existir) -->
+    <section id="screen-home" class="screen active" aria-labelledby="home-title">
+      <div class="container container--center">
+        <div class="home-layout">
+          <div class="card card--hero drop-in" data-aos="fade-up">
+            <h2 id="home-title" class="title-contrast">Desafie seus conhecimentos</h2>
+            <p class="subtitle">Escolha uma categoria e mostre o quanto sabe em um quiz rápido e divertido, com animações e uma experiência fluida em qualquer dispositivo.</p>
+
+            <ul class="hero-categories" role="list" aria-label="Categorias do jogo">
+              <li class="hero-cat" data-id="general">
+                <span class="hero-icon" aria-hidden="true">🧠</span>
+                <span class="hero-name">Conhecimentos gerais</span>
+              </li>
+              <li class="hero-cat" data-id="games">
+                <span class="hero-icon" aria-hidden="true">🎮</span>
+                <span class="hero-name">Jogos</span>
+              </li>
+              <li class="hero-cat" data-id="series">
+                <span class="hero-icon" aria-hidden="true">📺</span>
+                <span class="hero-name">Séries</span>
+              </li>
+              <li class="hero-cat" data-id="movies">
+                <span class="hero-icon" aria-hidden="true">🎬</span>
+                <span class="hero-name">Filmes</span>
+              </li>
+              <li class="hero-cat" data-id="science">
+                <span class="hero-icon" aria-hidden="true">🔬</span>
+                <span class="hero-name">Ciência</span>
+              </li>
+              <li class="hero-cat" data-id="astronomy">
+                <span class="hero-icon" aria-hidden="true">🌌</span>
+                <span class="hero-name">Astronomia</span>
+              </li>
+            </ul>
+
+            <button class="btn primary hero-start" id="btn-start" aria-controls="screen-categories">Começar</button>
+          </div>
+
+          <!-- Card de histórico (renderizado quando houver partidas) -->
+          <aside class="card card--history drop-in" id="history-card" aria-live="polite" hidden>
+            <h3 class="title-contrast">Histórico de partidas</h3>
+            <ul class="history-list" id="history-list" role="list" aria-label="Histórico">
+              <!-- itens via JS -->
+            </ul>
+            <div class="footer-actions">
+              <button class="btn ghost" id="btn-clear-history">Limpar histórico</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seleção de Categorias (mantida para navegação alternativa) -->
+    <section id="screen-categories" class="screen" aria-labelledby="categories-title">
+      <div class="container">
+        <h2 id="categories-title" class="title-contrast" data-aos="fade-right">Selecione uma categoria</h2>
+        <div class="grid grid--categories">
+          <!-- Botões de categoria gerados via JS -->
+        </div>
+        <div class="footer-actions">
+          <button class="btn ghost" data-goto="screen-home">Voltar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tela do Quiz -->
+    <section id="screen-quiz" class="screen" aria-labelledby="quiz-title" aria-live="polite">
+      <div class="container">
+        <div class="quiz-header" data-aos="fade-down">
+          <div class="quiz-title-wrap">
+            <h2 id="quiz-title" class="title-contrast">Quiz</h2>
+            <!-- Timer Circular -->
+            <div class="timer" aria-label="Tempo restante">
+              <svg class="timer-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="timer-bg" cx="60" cy="60" r="54"></circle>
+                <circle class="timer-progress" cx="60" cy="60" r="54"></circle>
+              </svg>
+              <div class="timer-label"><span id="timer-text">60</span></div>
+            </div>
+          </div>
+          <div class="meta">
+            <span id="quiz-category-label" class="tag">Categoria</span>
+            <span class="progress" aria-live="polite">
+              Pergunta <strong id="progress-current">1</strong>/<span id="progress-total">10</span>
+            </span>
+            <span class="score">Pontuação: <strong id="score">0</strong></span>
+          </div>
+        </div>
+
+        <div class="card card--question drop-in" data-aos="zoom-in">
+          <div id="question-text" class="question" role="heading" aria-level="3">Carregando...</div>
+
+          <ul class="answers" role="listbox" aria-label="Alternativas">
+            <!-- Alternativas via JS -->
+          </ul>
+
+          <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+
+          <div class="footer-actions">
+            <button class="btn" id="btn-skip" aria-label="Pular para próxima pergunta">Pular</button>
+            <button class="btn primary" id="btn-next" disabled>Próxima</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay de resultado instantâneo no acerto -->
+      <div class="overlay-result" id="overlay-correct" aria-hidden="true">
+        <div class="overlay-burst">CORRETO!</div>
+        <div class="overlay-points" id="overlay-points">+10 pontos</div>
+      </div>
+    </section>
+
+    <!-- Resultado Final -->
+    <section id="screen-result" class="screen" aria-labelledby="result-title">
+      <div class="container container--center">
+        <div class="card card--result drop-in" data-aos="fade-up">
+          <h2 id="result-title" class="title-contrast">Resultado</h2>
+          <p class="big">Pontuação final: <strong id="final-score">0</strong></p>
+          <p id="result-message" class="subtitle">Excelente desempenho!</p>
+          <div class="footer-actions">
+            <button class="btn" id="btn-restart">Jogar novamente</button>
+            <button class="btn ghost" data-goto="screen-home">Voltar ao início</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Feito com animações AOS, gradiente animado e paleta azul + cinza escuro para alto contraste e legibilidade.</p>
+    </div>
+  </footer>
+
+  <!-- AOS JS (CDN) -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- App -->
+  <script src="./app.js"></script>
+</body>
 </html>
