@@ -1,0 +1,17 @@
+{
+"name": "quiznova/app",
+"type": "project",
+"require": {
+"openai-php/client": "^0.8"
+},
+"autoload": {
+"psr-4": {
+"QuizNova": "backend/"
+}
+},
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
