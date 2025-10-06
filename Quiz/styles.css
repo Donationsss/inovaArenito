@@ -279,6 +279,7 @@ h2{
 }
 
 /* Overlay com fundo de modal e mensagens mais próximas */
+/* Overlay correto */
 .overlay-result{
   position: fixed; inset:0; display:none; place-items:center; z-index:60;
   pointer-events:none;
@@ -298,6 +299,22 @@ h2{
   color:#d8ffee; text-shadow: 0 4px 18px rgba(0,167,95,.45);
   animation: pointsUp 1400ms cubic-bezier(.2,.7,.2,1) both;
 }
+
+/* Overlay errado (fundo vermelho) */
+.overlay-wrong{
+  position: fixed; inset:0; display:none; place-items:center; z-index:60;
+  pointer-events:none;
+  background: rgba(255,0,0,0.5);
+  backdrop-filter: blur(2px);
+}
+.overlay-wrong.active{ display:grid; }
+.overlay-wrong-burst{
+  margin-bottom:2px;
+  font-weight:800; font-size: clamp(36px, 6vw, 64px);
+  color:#fff0f0; text-shadow: 0 6px 26px rgba(255,50,50,.75);
+  animation: burst 1200ms cubic-bezier(.2,.7,.2,1) both;
+}
+
 @keyframes burst{
   0%{ transform: scale(.85); opacity:0; filter: blur(2px); }
   60%{ transform: scale(1.05); opacity:1; filter: blur(0); }
