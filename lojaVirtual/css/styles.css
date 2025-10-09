@@ -892,3 +892,8 @@ body {
     color: var(--text-secondary);
     line-height: 1.6;
 }
+
+/* Evitar transições no boot do tema */
+.preload *, .preload *::before, .preload *::after {
+transition: none !important;
+}

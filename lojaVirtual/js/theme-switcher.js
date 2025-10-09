@@ -38,3 +38,4 @@ document.addEventListener('DOMContentLoaded', function() {
         themeToggleDash.addEventListener('click', toggleTheme);
     }
 });
+
