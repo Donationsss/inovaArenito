@@ -7,8 +7,9 @@ $error = $_GET['error'] ?? '';
 <head>
     <meta charset="UTF-8">
     <title>Cadastro | TechStore</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="auth-container">
@@ -24,8 +25,9 @@ $error = $_GET['error'] ?? '';
 
                 <label>Senha</label>
                 <input type="password" name="password" required>
-
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <div class="entry-button">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
 
                 <div class="auth-footer">
                     Já tem conta? <a href="login.php">Entrar</a>

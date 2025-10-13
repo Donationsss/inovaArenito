@@ -5,8 +5,19 @@ if (isset($_SESSION['usuario_id'])) {
     header("Location: dashboard.html");
     exit;
 }
+
 $error = $_GET['error'] ?? '';
+$logoutSuccess = isset($_GET['logout']) ? true : false;
 ?>
+<!-- ... resto do código ... -->
+<?php if($error): ?>
+    <div class="alert-error"><?= htmlspecialchars($error) ?></div>
+<?php endif; ?>
+<?php if($logoutSuccess): ?>
+    <div class="alert-success">Logout realizado com sucesso.</div>
+<?php endif; ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -36,9 +47,9 @@ $error = $_GET['error'] ?? '';
                     <label><input type="checkbox" name="remember"> Lembre de mim</label>
                     <a href="reset.php" class="auth-link">Esqueceu a senha?</a>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Entrar</button>
-
+                <div class="entry-button">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
                 <div class="auth-footer">
                     Não tem uma conta? <a href="register.php">Cadastre-se</a>
                 </div>

@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db   = 'nome_do_banco';
-$user = 'usuario';
-$pass = 'senha';
+$db   = 'techstore';
+$user = 'root';
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
