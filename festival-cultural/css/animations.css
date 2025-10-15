@@ -1,0 +1,237 @@
+/* ===========================
+   KEYFRAMES
+   =========================== */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===========================
+   CLASSES DE ANIMAÇÃO
+   =========================== */
+
+.animate-fade-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-fade-up.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.animate-fade-up.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.animate-fade-up.delay-3 {
+    animation-delay: 0.6s;
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.animate-on-scroll.delay-1 {
+    transition-delay: 0.2s;
+}
+
+.animate-on-scroll.delay-2 {
+    transition-delay: 0.4s;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================
+   EFEITOS DE HOVER
+   =========================== */
+
+.card__image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.destaque-card:hover .card__image::after {
+    opacity: 1;
+}
+
+/* ===========================
+   TRANSIÇÕES SUAVES
+   =========================== */
+
+.destaque-card,
+.schedule-item,
+.info__card,
+.social__link,
+.btn,
+.nav__link,
+.theme-toggle {
+    will-change: transform;
+}
+
+/* ===========================
+   ANIMAÇÕES DOS CARDS (NOVO)
+   =========================== */
+
+.destaque-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.destaque-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(59, 130, 246, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.destaque-card:hover::before {
+    left: 100%;
+}
+
+.destaque-card:hover .card__image {
+    transform: scale(1.1);
+}
+
+.card__image {
+    transition: transform 0.5s ease;
+    overflow: hidden;
+}
+
+.destaque-card:hover .card__button {
+    background: var(--gradient-primary);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.destaque-card:hover .card__title {
+    color: var(--color-primary);
+}
+
+/* Animação de pulse no ícone dos cards home */
+.destaque-card-home:hover .card__icon {
+    animation: pulseIcon 0.6s ease;
+}
+
+@keyframes pulseIcon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Animação de shake nos botões */
+.card__button:hover {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Efeito de brilho no hover */
+.sobre__card:hover {
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+}
+
+.sobre__card:hover .sobre__icon {
+    animation: rotate360 0.6s ease;
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

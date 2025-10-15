@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre em contato com o Festival Cultural">
+    <title>Contato | Festival Cultural 2025</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-theme="dark">
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural</span>
+                </a>
+            </div>
+            
+            <ul class="nav__menu" id="navMenu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Início</a></li>
+                <li class="nav__item"><a href="eventos.html" class="nav__link">Eventos</a></li>
+                <li class="nav__item"><a href="agenda.html" class="nav__link">Agenda</a></li>
+                <li class="nav__item"><a href="contato.html" class="nav__link active">Contato</a></li>
+            </ul>
+
+            <div class="nav__actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <span class="theme-toggle__icon">🌙</span>
+                </button>
+                <button class="nav__toggle" id="navToggle" aria-label="Menu">
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-header__title animate-fade-up">Entre em Contato</h1>
+            <p class="page-header__subtitle animate-fade-up delay-1">Dúvidas? Estamos aqui para ajudar</p>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contato section">
+        <div class="container">
+            <div class="contato__grid">
+                <div class="contato__info animate-on-scroll">
+                    <h2 class="section__title">Fale Conosco</h2>
+                    <p class="section__subtitle">Entre em contato através dos nossos canais</p>
+                    
+                    <div class="info__list">
+                        <div class="info__card">
+                            <span class="info__icon">📧</span>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contato@festivalcultural.com.br</p>
+                            </div>
+                        </div>
+                        <div class="info__card">
+                            <span class="info__icon">📱</span>
+                            <div>
+                                <h4>Telefone</h4>
+                                <p>(11) 98765-4321</p>
+                            </div>
+                        </div>
+                        <div class="info__card">
+                            <span class="info__icon">📍</span>
+                            <div>
+                                <h4>Localização</h4>
+                                <p>Centro Cultural da Cidade<br>Av. Principal, 1000</p>
+                            </div>
+                        </div>
+                        <div class="info__card">
+                            <span class="info__icon">🕐</span>
+                            <div>
+                                <h4>Horário de Atendimento</h4>
+                                <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 13h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contato__form animate-on-scroll delay-1" id="contactForm">
+                    <div class="form__group">
+                        <label for="name" class="form__label">Nome</label>
+                        <input type="text" id="name" class="form__input" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="email" class="form__label">Email</label>
+                        <input type="email" id="email" class="form__input" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="phone" class="form__label">Telefone</label>
+                        <input type="tel" id="phone" class="form__input" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form__group">
+                        <label for="subject" class="form__label">Assunto</label>
+                        <input type="text" id="subject" class="form__input" placeholder="Assunto da mensagem" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="message" class="form__label">Mensagem</label>
+                        <textarea id="message" class="form__input form__textarea" placeholder="Escreva sua mensagem aqui..." rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural 2025</span>
+                </div>
+                <p class="footer__text">Celebrando arte, música e cultura em nossa cidade</p>
+                <div class="footer__social">
+                    <a href="#" class="social__link" aria-label="Facebook">FB</a>
+                    <a href="#" class="social__link" aria-label="Instagram">IG</a>
+                    <a href="#" class="social__link" aria-label="Twitter">TW</a>
+                    <a href="#" class="social__link" aria-label="YouTube">YT</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Festival Cultural. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

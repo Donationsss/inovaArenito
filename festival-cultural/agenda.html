@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agenda completa do Festival Cultural 2025">
+    <title>Agenda | Festival Cultural 2025</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/calendar.css">
+</head>
+<body data-theme="dark">
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural</span>
+                </a>
+            </div>
+            
+            <ul class="nav__menu" id="navMenu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Início</a></li>
+                <li class="nav__item"><a href="eventos.html" class="nav__link">Eventos</a></li>
+                <li class="nav__item"><a href="agenda.html" class="nav__link active">Agenda</a></li>
+                <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a></li>
+            </ul>
+
+            <div class="nav__actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <span class="theme-toggle__icon">🌙</span>
+                </button>
+                <button class="nav__toggle" id="navToggle" aria-label="Menu">
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-header__title animate-fade-up">Calendário de Eventos</h1>
+            <p class="page-header__subtitle animate-fade-up delay-1">Navegue pelos meses e clique nos dias para ver a programação</p>
+        </div>
+    </section>
+
+        <!-- Calendário -->
+    <section class="calendar-section section">
+        <div class="container container--small">
+            
+            <!-- Controles Unificados -->
+            <div class="calendar-controls animate-on-scroll">
+                <button class="control-btn control-btn--nav" onclick="previousMonth()" aria-label="Mês anterior">
+                    <span>‹</span>
+                </button>
+                
+                <div class="date-selector-inline">
+                    <select id="monthSelect" class="selector-input selector-input--inline">
+                        <option value="0">Janeiro</option>
+                        <option value="1">Fevereiro</option>
+                        <option value="2">Março</option>
+                        <option value="3">Abril</option>
+                        <option value="4">Maio</option>
+                        <option value="5">Junho</option>
+                        <option value="6">Julho</option>
+                        <option value="7">Agosto</option>
+                        <option value="8">Setembro</option>
+                        <option value="9">Outubro</option>
+                        <option value="10" selected>Novembro</option>
+                        <option value="11">Dezembro</option>
+                    </select>
+                    
+                    <span class="selector-separator">/</span>
+                    
+                    <select id="yearSelect" class="selector-input selector-input--inline">
+                        <!-- Anos serão gerados dinamicamente -->
+                    </select>
+                    
+                    <button class="btn-today" onclick="goToToday()">
+                        <span class="today-icon">📅</span>
+                        <span class="today-text">Hoje</span>
+                    </button>
+                </div>
+                
+                <button class="control-btn control-btn--nav" onclick="nextMonth()" aria-label="Próximo mês">
+                    <span>›</span>
+                </button>
+            </div>
+
+            <!-- Grid do Calendário -->
+            <div class="calendar-wrapper animate-on-scroll delay-1">
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Será gerado dinamicamente pelo JavaScript -->
+                </div>
+            </div>
+
+            <!-- Legenda -->
+            <div class="calendar-legend animate-on-scroll delay-2">
+                <div class="legend-item">
+                    <span class="legend-dot legend-event"></span>
+                    <span>Eventos Disponíveis</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot legend-today"></span>
+                    <span>Hoje</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal do Calendário -->
+    <div class="modal" id="calendarModal">
+        <div class="modal__overlay" onclick="closeCalendarModal()"></div>
+        <div class="modal__container modal__container--calendar">
+            <button class="modal__close" onclick="closeCalendarModal()" aria-label="Fechar modal">
+                <span>&times;</span>
+            </button>
+            
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__date" id="modalDate">20 de Novembro</h2>
+                    <p class="modal__day-name" id="modalDayName">Quinta-feira</p>
+                </div>
+                
+                <div class="modal__events" id="modalEvents">
+                    <!-- Eventos serão inseridos dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural 2025</span>
+                </div>
+                <p class="footer__text">Celebrando arte, música e cultura em nossa cidade</p>
+                <div class="footer__social">
+                    <a href="#" class="social__link" aria-label="Facebook">FB</a>
+                    <a href="#" class="social__link" aria-label="Instagram">IG</a>
+                    <a href="#" class="social__link" aria-label="Twitter">TW</a>
+                    <a href="#" class="social__link" aria-label="YouTube">YT</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Festival Cultural. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>

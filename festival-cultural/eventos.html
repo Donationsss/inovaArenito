@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eventos do Festival Cultural 2025">
+    <title>Eventos | Festival Cultural 2025</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body data-theme="dark">
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural</span>
+                </a>
+            </div>
+            
+            <ul class="nav__menu" id="navMenu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Início</a></li>
+                <li class="nav__item"><a href="eventos.html" class="nav__link active">Eventos</a></li>
+                <li class="nav__item"><a href="agenda.html" class="nav__link">Agenda</a></li>
+                <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a></li>
+            </ul>
+
+            <div class="nav__actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <span class="theme-toggle__icon">🌙</span>
+                </button>
+                <button class="nav__toggle" id="navToggle" aria-label="Menu">
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-header__title animate-fade-up">Todos os Eventos</h1>
+            <p class="page-header__subtitle animate-fade-up delay-1">Confira toda a programação disponível</p>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filters-section section">
+        <div class="container">
+            <div class="filters animate-on-scroll">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="outubro">Outubro</button>
+                <button class="filter-btn" data-filter="novembro">Novembro</button>
+                <button class="filter-btn" data-filter="dezembro">Dezembro</button>
+                <button class="filter-btn" data-filter="2026">2026</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eventos -->
+    <section class="destaques section">
+        <div class="container">
+            <div class="destaques__grid">
+                
+                <!-- OUTUBRO 2025 -->
+                <article class="destaque-card animate-on-scroll" data-event="7" data-month="outubro">
+                    <div class="card__image card__image--7">
+                        <div class="card__tag">18 OUT</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Reunião de Planejamento</h3>
+                        <p class="card__description">Alinhamento final da equipe organizadora do festival</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 10h00</span>
+                            <span class="info__item">📍 Centro Cultural</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(7)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-1" data-event="8" data-month="outubro">
+                    <div class="card__image card__image--8">
+                        <div class="card__tag">25 OUT</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Coletiva de Imprensa</h3>
+                        <p class="card__description">Apresentação oficial do Festival Cultural 2025</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 15h00</span>
+                            <span class="info__item">📍 Sala de Imprensa</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(8)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="9" data-month="outubro">
+                    <div class="card__image card__image--9">
+                        <div class="card__tag">31 OUT</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Halloween Cultural</h3>
+                        <p class="card__description">Festa temática com música e arte</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 20h00</span>
+                            <span class="info__item">📍 Praça Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(9)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <!-- NOVEMBRO 2025 -->
+                <article class="destaque-card animate-on-scroll" data-event="10" data-month="novembro">
+                    <div class="card__image card__image--10">
+                        <div class="card__tag">01 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Feira de Artesanato</h3>
+                        <p class="card__description">Exposição e venda de artesanato local</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 10h00</span>
+                            <span class="info__item">📍 Praça Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(10)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-1" data-event="11" data-month="novembro">
+                    <div class="card__image card__image--11">
+                        <div class="card__tag">08 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Oficina de Teatro</h3>
+                        <p class="card__description">Workshop de interpretação teatral</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 14h00</span>
+                            <span class="info__item">📍 Teatro Principal</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(11)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="12" data-month="novembro">
+                    <div class="card__image card__image--12">
+                        <div class="card__tag">15 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Show Pré-Festival</h3>
+                        <p class="card__description">Apresentação especial de aquecimento</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 16h00</span>
+                            <span class="info__item">📍 Palco Alternativo</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(12)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <!-- FESTIVAL PRINCIPAL -->
+                <article class="destaque-card animate-on-scroll" data-event="1" data-month="novembro">
+                    <div class="card__image card__image--1">
+                        <div class="card__tag">20 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Abertura Oficial</h3>
+                        <p class="card__description">Cerimônia de abertura com apresentações especiais e shows musicais</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 19h00</span>
+                            <span class="info__item">📍 Teatro Principal</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(1)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-1" data-event="2" data-month="novembro">
+                    <div class="card__image card__image--2">
+                        <div class="card__tag">21 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Mostra de Cinema</h3>
+                        <p class="card__description">Filmes independentes nacionais e internacionais premiados</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 14h00</span>
+                            <span class="info__item">📍 Cine Teatro</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(2)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="3" data-month="novembro">
+                    <div class="card__image card__image--3">
+                        <div class="card__tag">22 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Festival de Dança</h3>
+                        <p class="card__description">Apresentações de grupos de dança contemporânea e tradicional</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 18h00</span>
+                            <span class="info__item">📍 Palco Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(3)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll" data-event="4" data-month="novembro">
+                    <div class="card__image card__image--4">
+                        <div class="card__tag">23 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Exposição de Arte</h3>
+                        <p class="card__description">Obras de artistas locais e visitantes em diversas linguagens</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 10h00</span>
+                            <span class="info__item">📍 Galeria Arte</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(4)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-1" data-event="5" data-month="novembro">
+                    <div class="card__image card__image--5">
+                        <div class="card__tag">24 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Show Nacional</h3>
+                        <p class="card__description">Grande show com artistas renomados da música brasileira</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 20h00</span>
+                            <span class="info__item">📍 Arena Principal</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(5)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="6" data-month="novembro">
+                    <div class="card__image card__image--6">
+                        <div class="card__tag">25 NOV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Encerramento</h3>
+                        <p class="card__description">Festa de encerramento com DJ e fogos de artifício</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 21h00</span>
+                            <span class="info__item">📍 Praça Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(6)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <!-- DEZEMBRO 2025 -->
+                <article class="destaque-card animate-on-scroll" data-event="13" data-month="dezembro">
+                    <div class="card__image card__image--13">
+                        <div class="card__tag">06 DEZ</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Retrospectiva do Festival</h3>
+                        <p class="card__description">Exposição de fotos e vídeos dos melhores momentos</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 17h00</span>
+                            <span class="info__item">📍 Galeria Arte</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(13)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-1" data-event="14" data-month="dezembro">
+                    <div class="card__image card__image--14">
+                        <div class="card__tag">13 DEZ</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Concerto de Natal</h3>
+                        <p class="card__description">Apresentação musical natalina especial</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 18h00</span>
+                            <span class="info__item">📍 Teatro Principal</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(14)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="15" data-month="dezembro">
+                    <div class="card__image card__image--15">
+                        <div class="card__tag">20 DEZ</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Festa de Fim de Ano</h3>
+                        <p class="card__description">Celebração de encerramento do ano cultural</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 19h00</span>
+                            <span class="info__item">📍 Centro Cultural</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(15)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll" data-event="16" data-month="dezembro">
+                    <div class="card__image card__image--16">
+                        <div class="card__tag">31 DEZ</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Réveillon Cultural</h3>
+                        <p class="card__description">Festa de ano novo com shows e fogos de artifício</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 22h00</span>
+                            <span class="info__item">📍 Praça Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(16)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <!-- 2026 -->
+                <article class="destaque-card animate-on-scroll delay-1" data-event="17" data-month="2026">
+                    <div class="card__image card__image--17">
+                        <div class="card__tag">10 JAN</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Feira de Arte Urbana</h3>
+                        <p class="card__description">Exposição de grafite e arte de rua</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 10h00</span>
+                            <span class="info__item">📍 Área Externa</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(17)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="18" data-month="2026">
+                    <div class="card__image card__image--18">
+                        <div class="card__tag">17 JAN</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Festival de Verão</h3>
+                        <p class="card__description">Música, dança e cultura ao ar livre</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 15h00</span>
+                            <span class="info__item">📍 Praça Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(18)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll" data-event="19" data-month="2026">
+                    <div class="card__image card__image--19">
+                        <div class="card__tag">24 JAN</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Noite de Jazz</h3>
+                        <p class="card__description">Apresentações de jazz ao vivo</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 18h00</span>
+                            <span class="info__item">📍 Café Cultural</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(19)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-1" data-event="20" data-month="2026">
+                    <div class="card__image card__image--20">
+                        <div class="card__tag">07 FEV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Bloco Cultural</h3>
+                        <p class="card__description">Pré-carnaval com muita música e dança</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 16h00</span>
+                            <span class="info__item">📍 Praça Central</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(20)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll delay-2" data-event="21" data-month="2026">
+                    <div class="card__image card__image--21">
+                        <div class="card__tag">14 FEV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Sarau do Amor</h3>
+                        <p class="card__description">Noite romântica com música e poesia</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 19h00</span>
+                            <span class="info__item">📍 Teatro Principal</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(21)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+                <article class="destaque-card animate-on-scroll" data-event="22" data-month="2026">
+                    <div class="card__image card__image--22">
+                        <div class="card__tag">21 FEV</div>
+                        <div class="card__overlay"></div>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">Oficina de Samba</h3>
+                        <p class="card__description">Aprenda a tocar instrumentos de samba</p>
+                        <div class="card__info">
+                            <span class="info__item">🕐 15h00</span>
+                            <span class="info__item">📍 Sala de Música</span>
+                        </div>
+                        <button class="card__button" onclick="openModal(22)">Ver Detalhes</button>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="eventModal">
+        <div class="modal__overlay" onclick="closeModal()"></div>
+        <div class="modal__container">
+            <button class="modal__close" onclick="closeModal()" aria-label="Fechar modal">
+                <span>&times;</span>
+            </button>
+            
+            <div class="modal__content">
+                <div class="modal__image" id="modalImage"></div>
+                
+                <div class="modal__body">
+                    <div class="modal__tag" id="modalTag">20 NOV</div>
+                    <h2 class="modal__title" id="modalTitle">Título do Evento</h2>
+                    <p class="modal__description" id="modalDescription">Descrição do evento...</p>
+                    
+                    <div class="modal__details">
+                        <div class="detail__item">
+                            <span class="detail__icon">🕐</span>
+                            <div class="detail__info">
+                                <strong>Horário</strong>
+                                <span id="modalTime">19h00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail__item">
+                            <span class="detail__icon">📍</span>
+                            <div class="detail__info">
+                                <strong>Local</strong>
+                                <span id="modalLocation">Teatro Principal</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail__item">
+                            <span class="detail__icon">🎫</span>
+                            <div class="detail__info">
+                                <strong>Entrada</strong>
+                                <span id="modalTicket">Gratuita</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail__item">
+                            <span class="detail__icon">👥</span>
+                            <div class="detail__info">
+                                <strong>Capacidade</strong>
+                                <span id="modalCapacity">500 pessoas</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal__full-description" id="modalFullDescription">
+                        <h3>Sobre o Evento</h3>
+                        <p>Descrição completa do evento...</p>
+                    </div>
+                    
+                    <div class="modal__actions">
+                        <button class="btn btn--primary btn--full">Reservar Ingresso</button>
+                        <button class="btn btn--secondary btn--full" onclick="closeModal()">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural 2025</span>
+                </div>
+                <p class="footer__text">Celebrando arte, música e cultura em nossa cidade</p>
+                <div class="footer__social">
+                    <a href="#" class="social__link" aria-label="Facebook">FB</a>
+                    <a href="#" class="social__link" aria-label="Instagram">IG</a>
+                    <a href="#" class="social__link" aria-label="Twitter">TW</a>
+                    <a href="#" class="social__link" aria-label="YouTube">YT</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Festival Cultural. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/eventos-filter.js"></script>
+</body>
+</html>

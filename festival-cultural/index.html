@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Cultural - Agenda completa de eventos culturais">
+    <title>Festival Cultural 2025 | Início</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-theme="dark">
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural</span>
+                </a>
+            </div>
+            
+            <ul class="nav__menu" id="navMenu">
+                <li class="nav__item"><a href="index.html" class="nav__link active">Início</a></li>
+                <li class="nav__item"><a href="eventos.html" class="nav__link">Eventos</a></li>
+                <li class="nav__item"><a href="agenda.html" class="nav__link">Agenda</a></li>
+                <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a></li>
+            </ul>
+
+            <div class="nav__actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <span class="theme-toggle__icon">🌙</span>
+                </button>
+                <button class="nav__toggle" id="navToggle" aria-label="Menu">
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                    <span class="toggle__line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero__background"></div>
+        <div class="hero__content container">
+            <h1 class="hero__title animate-fade-up">Festival Cultural 2025</h1>
+            <p class="hero__subtitle animate-fade-up delay-1">Celebrando Arte, Música e Cultura</p>
+            <p class="hero__description animate-fade-up delay-2">
+                Dias 20 a 25 de Novembro | Centro Cultural da Cidade
+            </p>
+            <div class="hero__buttons animate-fade-up delay-3">
+                <a href="eventos.html" class="btn btn--primary">Ver Eventos</a>
+                <a href="agenda.html" class="btn btn--secondary">Agenda Completa</a>
+            </div>
+        </div>
+        <div class="hero__scroll">
+            <span class="scroll__text">Role para explorar</span>
+            <span class="scroll__arrow">↓</span>
+        </div>
+    </section>
+
+    <!-- Sobre o Festival -->
+    <section class="sobre section">
+        <div class="container">
+            <h2 class="section__title animate-on-scroll">Sobre o Festival</h2>
+            <p class="section__subtitle animate-on-scroll">Uma celebração da diversidade cultural</p>
+            
+            <div class="sobre__content">
+                <div class="sobre__card animate-on-scroll">
+                    <div class="sobre__icon">🎨</div>
+                    <h3>Arte e Cultura</h3>
+                    <p>Exposições, mostras e apresentações das mais diversas formas de expressão artística</p>
+                </div>
+
+                <div class="sobre__card animate-on-scroll delay-1">
+                    <div class="sobre__icon">🎵</div>
+                    <h3>Música ao Vivo</h3>
+                    <p>Shows e apresentações musicais com artistas locais e nacionais renomados</p>
+                </div>
+
+                <div class="sobre__card animate-on-scroll delay-2">
+                    <div class="sobre__icon">🎭</div>
+                    <h3>Teatro e Dança</h3>
+                    <p>Espetáculos teatrais e performances de dança contemporânea e tradicional</p>
+                </div>
+
+                <div class="sobre__card animate-on-scroll">
+                    <div class="sobre__icon">🎬</div>
+                    <h3>Cinema</h3>
+                    <p>Mostra de filmes independentes nacionais e internacionais premiados</p>
+                </div>
+
+                <div class="sobre__card animate-on-scroll delay-1">
+                    <div class="sobre__icon">📚</div>
+                    <h3>Workshops</h3>
+                    <p>Oficinas e palestras com artistas e profissionais da cultura</p>
+                </div>
+
+                <div class="sobre__card animate-on-scroll delay-2">
+                    <div class="sobre__icon">🍽️</div>
+                    <h3>Gastronomia</h3>
+                    <p>Praça de alimentação com o melhor da culinária regional e internacional</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Destaques Rápidos -->
+    <section class="destaques-home section">
+        <div class="container">
+            <h2 class="section__title animate-on-scroll">Destaques</h2>
+            <p class="section__subtitle animate-on-scroll">Os eventos mais aguardados</p>
+            
+            <div class="destaques__grid-home">
+                <article class="destaque-card-home animate-on-scroll" data-event-id="1">
+                    <div class="card-home__image card-home__image--1">
+                        <div class="card-home__overlay"></div>
+                        <div class="card__icon">🎤</div>
+                    </div>
+                    <div class="card-home__content">
+                        <h3>Abertura Oficial</h3>
+                        <p>20 de Novembro às 19h</p>
+                        <a href="eventos.html?highlight=1" class="card__link">Ver mais →</a>
+                    </div>
+                </article>
+
+                <article class="destaque-card-home animate-on-scroll delay-1" data-event-id="2">
+                    <div class="card-home__image card-home__image--2">
+                        <div class="card-home__overlay"></div>
+                        <div class="card__icon">🎬</div>
+                    </div>
+                    <div class="card-home__content">
+                        <h3>Mostra de Cinema</h3>
+                        <p>21 de Novembro às 14h</p>
+                        <a href="eventos.html?highlight=2" class="card__link">Ver mais →</a>
+                    </div>
+                </article>
+
+                <article class="destaque-card-home animate-on-scroll delay-2" data-event-id="3">
+                    <div class="card-home__image card-home__image--3">
+                        <div class="card-home__overlay"></div>
+                        <div class="card__icon">💃</div>
+                    </div>
+                    <div class="card-home__content">
+                        <h3>Festival de Dança</h3>
+                        <p>22 de Novembro às 18h</p>
+                        <a href="eventos.html?highlight=3" class="card__link">Ver mais →</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="center-btn animate-on-scroll">
+                <a href="eventos.html" class="btn btn--primary">Ver Todos os Eventos</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <span class="logo__icon">🎭</span>
+                    <span class="logo__text">Festival Cultural 2025</span>
+                </div>
+                <p class="footer__text">Celebrando arte, música e cultura em nossa cidade</p>
+                <div class="footer__social">
+                    <a href="#" class="social__link" aria-label="Facebook">FB</a>
+                    <a href="#" class="social__link" aria-label="Instagram">IG</a>
+                    <a href="#" class="social__link" aria-label="Twitter">TW</a>
+                    <a href="#" class="social__link" aria-label="YouTube">YT</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Festival Cultural. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
