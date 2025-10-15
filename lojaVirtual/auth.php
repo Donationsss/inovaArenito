@@ -17,12 +17,12 @@ if ($user && password_verify($password, $user['password'])) {
     $_SESSION['is_admin'] = (bool)$user['is_admin'];
 
     if ($remember) {
-        setcookie("usuario_id", $user['id'], time()+60*60*24*30, "/");
+        setcookie("usuario_id", $user['id'], time() + 60 * 60 * 24 * 30, "/");
     }
     if ($user['is_admin']) {
         header("Location: dashboard.html");
     } else {
-        header("Location: index.html");
+        header("Location: index.php");
     }
     exit;
 } else {
