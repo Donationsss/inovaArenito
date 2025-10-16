@@ -1,12 +1,17 @@
 <?php
 session_start();
+$ok = isset($_SESSION['reset_code_ok'], $_SESSION['reset_email']) && $_SESSION['reset_code_ok'] === true;
+if (!$ok) {
+    header("Location: reset_email.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro | TechStore</title>
+    <title>Recuperar Senha - Nova Senha</title>
     <script>
         (function() {
             try {
@@ -28,24 +33,18 @@ session_start();
     <div class="auth-container">
         <div class="auth-card">
             <div class="logo"><i class="fas fa-store"></i> TechStore</div>
-            <h2>Criar Conta</h2>
-            <form method="POST" action="register_submit.php" id="registerForm">
-                <label>Nome de usuário</label>
-                <input type="text" name="username" required>
-
-                <label>E-mail</label>
-                <input type="email" name="email" required>
-
-                <label>Senha</label>
+            <h2>Definir Nova Senha</h2>
+            <form method="POST" action="reset_password_submit.php" id="resetForm">
+                <label>Nova Senha</label>
                 <input type="password" name="password" id="password" required>
 
-                <label>Confirmar Senha</label>
+                <label>Confirmar Nova Senha</label>
                 <input type="password" name="confirm_password" id="confirm_password" required>
 
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
 
                 <div class="auth-footer">
-                    Já tem conta?
+                    Lembrou a senha?
                     <a href="login.php" class="btn btn-secondary">Entrar</a>
                 </div>
             </form>
@@ -54,21 +53,27 @@ session_start();
 
     <script src="js/toast.js"></script>
     <script>
-        const form = document.getElementById('registerForm');
-        form.addEventListener('submit', (e) => {
-            const pass = document.getElementById('password').value.trim();
-            const confirm = document.getElementById('confirm_password').value.trim();
-            if (pass !== confirm) {
+        document.getElementById('resetForm').addEventListener('submit', (e) => {
+            const p = document.getElementById('password').value.trim();
+            const c = document.getElementById('confirm_password').value.trim();
+            if (p !== c) {
                 e.preventDefault();
                 showToast('As senhas não conferem.', 'error', 3000);
             }
         });
         (function() {
             const p = new URLSearchParams(location.search);
-            const err = p.get('error');
-            if (err) {
-                showToast(err, 'error', 3000);
-                p.delete('error');
+            if (p.get('ok') === '1') {
+                showToast('Código verificado.', 'success', 3000);
+                p.delete('ok');
+            }
+            if (p.get('err') === 'mismatch') {
+                showToast('As senhas não conferem.', 'error', 3000);
+                p.delete('err');
+            }
+            if (p.get('err') === 'generic') {
+                showToast('Erro ao atualizar senha.', 'error', 3000);
+                p.delete('err');
             }
             showToastFromQuery();
             const url = new URL(location.href);

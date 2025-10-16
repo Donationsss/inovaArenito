@@ -1,5 +1,10 @@
-<?php session_start();
-$isLogged = isset($_SESSION['usuario_id']); ?>
+<?php
+session_start();
+$isLogged = isset($_SESSION['usuario_id']);
+$isAdmin  = !empty($_SESSION['is_admin']);
+$username = $_SESSION['usuario_nome'] ?? 'Usuário';
+?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -18,6 +23,8 @@ $isLogged = isset($_SESSION['usuario_id']); ?>
     <!-- Header -->
     <header class="header">
         <nav class="navbar container">
+            <div style="display: flex; align-items: center; justify-content:space-between">
+            </div>
             <div class="logo">
                 <i class="fas fa-store"></i>
                 <span>TechStore</span>
@@ -28,30 +35,47 @@ $isLogged = isset($_SESSION['usuario_id']); ?>
                 <li><a href="sobre.php" class="nav-link active">Sobre</a></li>
             </ul>
             <div class="nav-actions" data-aos="fade-left" data-aos-delay="100">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
 
-                <?php if (!$isLogged): ?>
-                    <a href="login.php" class="btn btn-outline" style="margin-left:.5rem;">
-                        <i class="fas fa-sign-in-alt"></i> Entrar
-                    </a>
-                <?php else: ?>
-                    <a href="logout.php" class="btn btn-outline" style="margin-left:.5rem;">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                <?php endif; ?>
+                    <button class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
 
-                <button class="cart-btn">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </button>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+                    <?php if (!$isLogged): ?>
+                        <a href="login.php" class="btn btn-outline nav-login">
+                            <i class="fas fa-sign-in-alt"></i> Entrar
+                        </a>
+                    <?php else: ?>
+                        <div class="nav-user dropdown">
+                            <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                                <img
+                                    src="https://ui-avatars.com/api/?name=<?= urlencode($username) ?>&background=2563eb&color=fff&size=64"
+                                    alt="Avatar" class="nav-avatar">
+                                <span class="nav-username"><?= htmlspecialchars($username) ?></span>
+                                <i class="fas fa-chevron-down dropdown-caret"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <?php if ($isAdmin): ?>
+                                    <a href="dashboard.php" class="dropdown-item">
+                                        <i class="fas fa-chart-line"></i> Voltar ao Dashboard
+                                    </a>
+                                <?php endif; ?>
+                                <a href="logout.php" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
         </nav>
     </header>
 

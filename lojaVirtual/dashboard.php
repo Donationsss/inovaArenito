@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - TechStore</title>
+  <link rel="stylesheet" href="./css/dashboard.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <i class="fas fa-store"></i>
+        <span>TechStore</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.php" class="nav-item active">
+        <i class="fas fa-chart-line"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="dashboard-vendas.php" class="nav-item">
+        <i class="fas fa-shopping-bag"></i>
+        <span>Vendas</span>
+      </a>
+      <a href="dashboard-produtos.php" class="nav-item">
+        <i class="fas fa-box"></i>
+        <span>Produtos</span>
+      </a>
+      <a href="dashboard-clientes.php" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Clientes</span>
+      </a>
+      <a href="dashboard-relatorios.php" class="nav-item">
+        <i class="fas fa-chart-bar"></i>
+        <span>Relatórios</span>
+      </a>
+      <a href="dashboard-configuracoes.php" class="nav-item">
+        <i class="fas fa-cog"></i>
+        <span>Configurações</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.php" class="nav-item">
+        <i class="fas fa-arrow-left"></i>
+        <span>Voltar à Loja</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Buscar..." />
+        </div>
+        <button class="theme-toggle" id="themeToggleDash">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="notifications">
+          <i class="fas fa-bell"></i>
+          <span class="badge">3</span>
+        </div>
+        <div class="user-menu">
+          <img
+            src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff"
+            alt="User" />
+          <span>Admin</span>
+          <a
+            href="logout.php"
+            class="auth-link"
+            title="Sair"
+            style="margin-left: 8px"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card" data-aos="fade-up">
+          <div class="stat-icon blue">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalVendas">0</h3>
+            <p>Total de Vendas</p>
+            <span class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 12.5%
+            </span>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-icon green">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="receitaTotal">R$ 0,00</h3>
+            <p>Receita Total</p>
+            <span class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 8.3%
+            </span>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-icon orange">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalClientes">0</h3>
+            <p>Clientes Ativos</p>
+            <span class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 5.2%
+            </span>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-icon purple">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="produtosVendidos">0</h3>
+            <p>Produtos Vendidos</p>
+            <span class="stat-trend down">
+              <i class="fas fa-arrow-down"></i> 2.1%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card" data-aos="fade-up">
+          <div class="card-header">
+            <h3>Vendas do Mês</h3>
+            <select class="select-period">
+              <option>Últimos 7 dias</option>
+              <option>Últimos 30 dias</option>
+              <option>Últimos 90 dias</option>
+            </select>
+          </div>
+          <div class="chart-container" style="height: 400px;">
+            <canvas id="salesChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-header">
+            <h3>Top Produtos</h3>
+          </div>
+          <div class="top-products">
+            <div class="product-item">
+              <div class="product-info">
+                <span class="rank">#1</span>
+                <span class="name">Notebook Ultra Pro</span>
+              </div>
+              <div class="product-stats">
+                <span class="sales">45 vendas</span>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="product-item">
+              <div class="product-info">
+                <span class="rank">#2</span>
+                <span class="name">Smartphone XZ Plus</span>
+              </div>
+              <div class="product-stats">
+                <span class="sales">38 vendas</span>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 76%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="product-item">
+              <div class="product-info">
+                <span class="rank">#3</span>
+                <span class="name">Notebook Gamer X</span>
+              </div>
+              <div class="product-stats">
+                <span class="sales">32 vendas</span>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 64%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="product-item">
+              <div class="product-info">
+                <span class="rank">#4</span>
+                <span class="name">Smartwatch Elite</span>
+              </div>
+              <div class="product-stats">
+                <span class="sales">28 vendas</span>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 56%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="product-item">
+              <div class="product-info">
+                <span class="rank">#5</span>
+                <span class="name">Fone Wireless Pro</span>
+              </div>
+              <div class="product-stats">
+                <span class="sales">24 vendas</span>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 48%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Sales Table -->
+      <div class="table-card" data-aos="fade-up">
+        <div class="card-header">
+          <h3>Vendas Recentes</h3>
+          <button class="btn-export">
+            <i class="fas fa-download"></i>
+            Exportar
+          </button>
+        </div>
+        <div class="table-container">
+          <table class="sales-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="salesTableBody">
+              <!-- Vendas serão inseridas aqui via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/theme-switcher.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/dashboard-data.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Dashboard TechStore</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/dashboard-pages.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>TechStore</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.php" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="dashboard-vendas.php" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Vendas</span>
+            </a>
+            <a href="dashboard-produtos.php" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Produtos</span>
+            </a>
+            <a href="dashboard-clientes.php" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="dashboard-relatorios.php" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Relatórios</span>
+            </a>
+            <a href="dashboard-configuracoes.php" class="nav-item active">
+                <i class="fas fa-cog"></i>
+                <span>Configurações</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="index.php" class="nav-item">
+                <i class="fas fa-arrow-left"></i>
+                <span>Voltar à Loja</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Configurações</h1>
+            </div>
+            <div class="topbar-right">
+                <button class="theme-toggle" id="themeToggleDash">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="user-menu">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff" alt="User">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Settings Navigation -->
+            <div class="settings-nav" data-aos="fade-up">
+                <button class="settings-tab active" data-tab="geral">
+                    <i class="fas fa-cog"></i>
+                    Geral
+                </button>
+                <button class="settings-tab" data-tab="perfil">
+                    <i class="fas fa-user"></i>
+                    Perfil
+                </button>
+                <button class="settings-tab" data-tab="loja">
+                    <i class="fas fa-store"></i>
+                    Loja
+                </button>
+                <button class="settings-tab" data-tab="pagamento">
+                    <i class="fas fa-credit-card"></i>
+                    Pagamento
+                </button>
+                <button class="settings-tab" data-tab="notificacoes">
+                    <i class="fas fa-bell"></i>
+                    Notificações
+                </button>
+                <button class="settings-tab" data-tab="seguranca">
+                    <i class="fas fa-shield-alt"></i>
+                    Segurança
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="settings-content">
+                <!-- Geral Tab -->
+                <div class="tab-panel active" id="geral" data-aos="fade-up">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Configurações Gerais</h2>
+                            <p>Configure as preferências básicas do sistema</p>
+                        </div>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Nome da Empresa</label>
+                                <input type="text" class="form-control" value="TechStore">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label>Idioma</label>
+                                    <select class="form-control">
+                                        <option>Português (BR)</option>
+                                        <option>English (US)</option>
+                                        <option>Español</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Fuso Horário</label>
+                                    <select class="form-control">
+                                        <option>América/São_Paulo (UTC-3)</option>
+                                        <option>América/New_York (UTC-5)</option>
+                                        <option>Europa/London (UTC+0)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Moeda</label>
+                                <select class="form-control">
+                                    <option>Real (R$)</option>
+                                    <option>Dólar ($)</option>
+                                    <option>Euro (€)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="switch-label">
+                                    <input type="checkbox" class="switch" checked>
+                                    <span>Modo Escuro Automático</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="switch-label">
+                                    <input type="checkbox" class="switch" checked>
+                                    <span>Ativar Animações</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-save"></i>
+                                Salvar Alterações
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Perfil Tab -->
+                <div class="tab-panel" id="perfil" data-aos="fade-up">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Informações do Perfil</h2>
+                            <p>Gerencie suas informações pessoais</p>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-avatar">
+                                <img src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff&size=120" alt="Avatar">
+                                <button class="btn-avatar-change">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            <form class="settings-form">
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label>Nome</label>
+                                        <input type="text" class="form-control" value="Admin">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Sobrenome</label>
+                                        <input type="text" class="form-control" value="Silva">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    <input type="email" class="form-control" value="admin@techstore.com">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label>Telefone</label>
+                                        <input type="tel" class="form-control" value="(11) 99999-9999">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Cargo</label>
+                                        <input type="text" class="form-control" value="Administrador">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bio</label>
+                                    <textarea class="form-control" rows="4" placeholder="Conte um pouco sobre você..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Atualizar Perfil
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loja Tab -->
+                <div class="tab-panel" id="loja" data-aos="fade-up">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Configurações da Loja</h2>
+                            <p>Configure os detalhes da sua loja virtual</p>
+                        </div>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Nome da Loja</label>
+                                <input type="text" class="form-control" value="TechStore">
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <textarea class="form-control" rows="3">Sua loja de tecnologia de confiança</textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label>E-mail de Contato</label>
+                                    <input type="email" class="form-control" value="contato@techstore.com">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Telefone de Suporte</label>
+                                    <input type="tel" class="form-control" value="0800-123-4567">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Endereço</label>
+                                <input type="text" class="form-control" value="Av. Paulista, 1000">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label>Cidade</label>
+                                    <input type="text" class="form-control" value="São Paulo">
+                                </div>
+                                <div class="form-group col-3">
+                                    <label>Estado</label>
+                                    <input type="text" class="form-control" value="SP">
+                                </div>
+                                <div class="form-group col-3">
+                                    <label>CEP</label>
+                                    <input type="text" class="form-control" value="01310-100">
+                                </div>
+                            </div>
+                            <hr>
+                            <h3>Redes Sociais</h3>
+                            <div class="form-group">
+                                <label><i class="fab fa-facebook"></i> Facebook</label>
+                                <input type="url" class="form-control" placeholder="https://facebook.com/techstore">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fab fa-instagram"></i> Instagram</label>
+                                <input type="url" class="form-control" placeholder="https://instagram.com/techstore">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fab fa-twitter"></i> Twitter</label>
+                                <input type="url" class="form-control" placeholder="https://twitter.com/techstore">
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-save"></i>
+                                Salvar Configurações
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Pagamento Tab -->
+                <div class="tab-panel" id="pagamento" data-aos="fade-up">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Métodos de Pagamento</h2>
+                            <p>Configure as formas de pagamento aceitas</p>
+                        </div>
+                        <div class="payment-methods">
+                            <div class="payment-method-card active">
+                                <div class="payment-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <h4>Cartão de Crédito</h4>
+                                    <p>Visa, Mastercard, Amex</p>
+                                </div>
+                                <label class="switch-label">
+                                    <input type="checkbox" class="switch" checked>
+                                </label>
+                            </div>
+                            <div class="payment-method-card active">
+                                <div class="payment-icon">
+                                    <i class="fas fa-barcode"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <h4>PIX</h4>
+                                    <p>Pagamento instantâneo</p>
+                                </div>
+                                <label class="switch-label">
+                                    <input type="checkbox" class="switch" checked>
+                                </label>
+                            </div>
+                            <div class="payment-method-card">
+                                <div class="payment-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <h4>Boleto Bancário</h4>
+                                    <p>Vencimento em 3 dias</p>
+                                </div>
+                                <label class="switch-label">
+                                    <input type="checkbox" class="switch">
+                                </label>
+                            </div>
+                            <div class="payment-method-card">
+                                <div class="payment-icon">
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <h4>PayPal</h4>
+                                    <p>Pagamento internacional</p>
+                                </div>
+                                <label class="switch-label">
+                                    <input type="checkbox" class="switch">
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Método
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notificações Tab -->
+                <div class="tab-panel" id="notificacoes" data-aos="fade-up">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Preferências de Notificações</h2>
+                            <p>Escolha como deseja receber notificações</p>
+                        </div>
+                        <div class="notification-settings">
+                            <div class="notification-group">
+                                <h3>Vendas</h3>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <strong>Nova venda realizada</strong>
+                                        <p>Receba notificação quando uma nova venda for concluída</p>
+                                    </div>
+                                    <label class="switch-label">
+                                        <input type="checkbox" class="switch" checked>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <strong>Pagamento confirmado</strong>
+                                        <p>Seja notificado quando um pagamento for aprovado</p>
+                                    </div>
+                                    <label class="switch-label">
+                                        <input type="checkbox" class="switch" checked>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="notification-group">
+                                <h3>Estoque</h3>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <strong>Estoque baixo</strong>
+                                        <p>Alerta quando o estoque atingir o nível mínimo</p>
+                                    </div>
+                                    <label class="switch-label">
+                                        <input type="checkbox" class="switch" checked>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <strong>Produto sem estoque</strong>
+                                        <p>Notificação quando um produto acabar</p>
+                                    </div>
+                                    <label class="switch-label">
+                                        <input type="checkbox" class="switch" checked>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="notification-group">
+                                <h3>Clientes</h3>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <strong>Novo cliente cadastrado</strong>
+                                        <p>Receba notificação de novos cadastros</p>
+                                    </div>
+                                    <label class="switch-label">
+                                        <input type="checkbox" class="switch">
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <strong>Avaliações de produtos</strong>
+                                        <p>Seja notificado sobre novas avaliações</p>
+                                    </div>
+                                    <label class="switch-label">
+                                        <input type="checkbox" class="switch" checked>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-primary">
+                            <i class="fas fa-save"></i>
+                            Salvar Preferências
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Segurança Tab -->
+                <div class="tab-panel" id="seguranca" data-aos="fade-up">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Segurança da Conta</h2>
+                            <p>Proteja sua conta com configurações de segurança</p>
+                        </div>
+                        <form class="settings-form">
+                            <h3>Alterar Senha</h3>
+                            <div class="form-group">
+                                <label>Senha Atual</label>
+                                <input type="password" class="form-control" placeholder="Digite sua senha atual">
+                            </div>
+                            <div class="form-group">
+                                <label>Nova Senha</label>
+                                <input type="password" class="form-control" placeholder="Digite a nova senha">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirmar Nova Senha</label>
+                                <input type="password" class="form-control" placeholder="Confirme a nova senha">
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-key"></i>
+                                Alterar Senha
+                            </button>
+                            <hr>
+                            <h3>Autenticação em Dois Fatores</h3>
+                            <div class="two-factor-section">
+                                <div class="two-factor-info">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div>
+                                        <strong>Adicione uma camada extra de segurança</strong>
+                                        <p>Proteja sua conta com autenticação em dois fatores</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-outline">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    Configurar 2FA
+                                </button>
+                            </div>
+                            <hr>
+                            <h3>Sessões Ativas</h3>
+                            <div class="active-sessions">
+                                <div class="session-item">
+                                    <i class="fas fa-laptop"></i>
+                                    <div class="session-info">
+                                        <strong>Windows - Chrome</strong>
+                                        <p>São Paulo, Brasil • Ativo agora</p>
+                                    </div>
+                                    <span class="badge-success">Atual</span>
+                                </div>
+                                <div class="session-item">
+                                    <i class="fas fa-mobile"></i>
+                                    <div class="session-info">
+                                        <strong>iPhone - Safari</strong>
+                                        <p>São Paulo, Brasil • 2 horas atrás</p>
+                                    </div>
+                                    <button class="btn-sm btn-danger">Encerrar</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-danger">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Encerrar Todas as Sessões
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/theme-switcher.js"></script>
+    <script src="js/dashboard-configuracoes.js"></script>
+</body>
+
+</html>

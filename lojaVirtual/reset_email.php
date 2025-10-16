@@ -6,7 +6,7 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro | TechStore</title>
+    <title>Recuperar Senha - E-mail</title>
     <script>
         (function() {
             try {
@@ -28,24 +28,17 @@ session_start();
     <div class="auth-container">
         <div class="auth-card">
             <div class="logo"><i class="fas fa-store"></i> TechStore</div>
-            <h2>Criar Conta</h2>
-            <form method="POST" action="register_submit.php" id="registerForm">
-                <label>Nome de usuário</label>
-                <input type="text" name="username" required>
-
+            <h2>Recuperar Senha</h2>
+            <p style="color:var(--text-secondary);margin-top:.25rem;font-size:.95rem;">
+                Informe o e-mail cadastrado para gerar um código de verificação.
+            </p>
+            <form method="POST" action="reset_email_submit.php">
                 <label>E-mail</label>
                 <input type="email" name="email" required>
-
-                <label>Senha</label>
-                <input type="password" name="password" id="password" required>
-
-                <label>Confirmar Senha</label>
-                <input type="password" name="confirm_password" id="confirm_password" required>
-
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary">Enviar código</button>
 
                 <div class="auth-footer">
-                    Já tem conta?
+                    Lembrou a senha?
                     <a href="login.php" class="btn btn-secondary">Entrar</a>
                 </div>
             </form>
@@ -54,21 +47,11 @@ session_start();
 
     <script src="js/toast.js"></script>
     <script>
-        const form = document.getElementById('registerForm');
-        form.addEventListener('submit', (e) => {
-            const pass = document.getElementById('password').value.trim();
-            const confirm = document.getElementById('confirm_password').value.trim();
-            if (pass !== confirm) {
-                e.preventDefault();
-                showToast('As senhas não conferem.', 'error', 3000);
-            }
-        });
         (function() {
             const p = new URLSearchParams(location.search);
-            const err = p.get('error');
-            if (err) {
-                showToast(err, 'error', 3000);
-                p.delete('error');
+            if (p.get('err') === 'notfound') {
+                showToast('E-mail não encontrado.', 'error', 3000);
+                p.delete('err');
             }
             showToastFromQuery();
             const url = new URL(location.href);

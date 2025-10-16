@@ -144,9 +144,11 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     color: var(--accent-blue);
     border: 1.5px solid var(--accent-blue);
     margin-top: 1.2rem;
+    padding: .25em;
 }
 .btn.btn-secondary:hover, .auth-footer a.btn:hover {
     background: var(--accent-blue);
+    text-decoration: none;
     color: #fff;
 }
 

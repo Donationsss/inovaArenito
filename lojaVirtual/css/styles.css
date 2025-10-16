@@ -898,3 +898,149 @@ body {
 .preload *, .preload *::before, .preload *::after {
 transition: none !important;
 }
+
+/* Nav user cluster */
+.nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;              /* Espaço entre avatar, nome e botão */
+  margin-left: 0.75rem;      /* Respiro após o botão de tema */
+}
+
+.nav-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: block;
+  border: 2px solid #fff;            /* Borda clara no light */
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  object-fit: cover;
+  background: transparent;
+}
+
+[data-theme="dark"] .nav-avatar {
+  border-color: var(--bg-secondary);  /* Borda coerente no dark */
+}
+
+.nav-username {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1;                     /* Centraliza verticalmente com o avatar */
+}
+
+.nav-logout {
+  padding: 0.5rem 0.9rem;             /* Botão compacto para harmonizar */
+  line-height: 1;
+  border-radius: 10px;
+}
+
+/* Garantir bons espaçamentos na barra */
+.nav-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Responsivo: em telas menores, empacotar melhor */
+@media (max-width: 768px) {
+  .nav-user {
+    gap: 0.6rem;
+  }
+  .nav-username {
+    font-size: 0.95rem;
+  }
+  .nav-logout {
+    padding: 0.45rem 0.75rem;
+  }
+}
+
+.app-toast {
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.app-toast i {
+  font-size: 1.05rem;
+}
+/* Toast base (opcional, pois usamos inline styles) */
+.app-toast i { font-size: 1.05rem; }
+.app-toast span { flex: 1; }
+#toast-container { pointer-events: none; }
+#toast-container .app-toast { pointer-events: all; }
+
+/* Perfil com dropdown */
+.nav-user.dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+.dropdown-toggle:hover {
+  border-color: var(--accent-blue);
+}
+.dropdown-caret {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px var(--shadow);
+  padding: 0.4rem;
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown.open .dropdown-menu {
+  display: block;
+  animation: fadeIn .15s ease;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background .2s ease;
+}
+.dropdown-item:hover {
+  background: var(--bg-primary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Avatar e username (mantendo seu estilo) */
+.nav-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid #fff; object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .nav-avatar { border-color: var(--bg-secondary); }
+
+.nav-username {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
