@@ -24,7 +24,7 @@ if (!$ok) {
             } catch (e) {}
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -40,8 +40,9 @@ if (!$ok) {
 
                 <label>Confirmar Nova Senha</label>
                 <input type="password" name="confirm_password" id="confirm_password" required>
-
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
 
                 <div class="auth-footer">
                     Lembrou a senha?

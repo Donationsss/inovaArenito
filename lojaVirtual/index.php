@@ -140,25 +140,6 @@ $username = $_SESSION['usuario_nome'] ?? 'Usuário';
                     </button>
                 </div>
             </div>
-            <div class="produto-info">
-                <h3 class="produto-title">Fone Wireless Pro</h3>
-                <p class="produto-description">Cancelamento de ruído, 30h bateria</p>
-                <div class="produto-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(4.0)</span>
-                </div>
-                <div class="produto-footer">
-                    <span class="produto-price">R$ 899,00</span>
-                    <button class="btn-add-cart"
-                        onclick="addToCart('Fone Wireless Pro', 899, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400')">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                </div>
-            </div>
         </div>
         </div>
 

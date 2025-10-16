@@ -21,7 +21,7 @@ $isLogged = isset($_SESSION['usuario_id']);
             } catch (e) {}
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -42,8 +42,9 @@ $isLogged = isset($_SESSION['usuario_id']);
                     <label><input type="checkbox" name="remember"> Lembre de mim</label>
                     <a href="reset_email.php" class="auth-link">Esqueceu a senha?</a>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Entrar</button>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
 
                 <div class="auth-footer">
                     Não tem uma conta?

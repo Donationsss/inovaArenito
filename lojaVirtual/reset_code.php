@@ -21,7 +21,7 @@ $devcode = $_GET['devcode'] ?? '';
             } catch (e) {}
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -46,7 +46,9 @@ $devcode = $_GET['devcode'] ?? '';
                 <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
                 <label>Código</label>
                 <input type="text" name="code" pattern="\d{6}" maxlength="6" placeholder="000000" required>
-                <button type="submit" class="btn btn-primary">Verificar</button>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="btn btn-primary">Verificar</button>
+                </div>
 
                 <div class="auth-footer">
                     Precisa gerar novamente?

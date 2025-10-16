@@ -19,7 +19,7 @@ session_start();
             } catch (e) {}
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -35,7 +35,9 @@ session_start();
             <form method="POST" action="reset_email_submit.php">
                 <label>E-mail</label>
                 <input type="email" name="email" required>
-                <button type="submit" class="btn btn-primary">Enviar código</button>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="btn btn-primary">Enviar código</button>
+                </div>
 
                 <div class="auth-footer">
                     Lembrou a senha?
