@@ -37,8 +37,11 @@ $series = $pdo->query("SELECT DATE(data) dia, SUM(valor_total) valor
 $kpis['vendas_mes'] = $series;
 
 /* vendas recentes */
-$recentes = $pdo->query("SELECT id, produto_nome, quantidade, valor_total, data, status
-                         FROM vendas ORDER BY data DESC LIMIT 20")->fetchAll();
+$recentes = $pdo->query("SELECT v.id, v.produto_nome, v.quantidade, v.valor_total, v.data, v.status, 
+                               COALESCE(u.username, v.cliente_email, 'Cliente Anônimo') as cliente
+                         FROM vendas v 
+                         LEFT JOIN usuarios u ON v.usuario_id = u.id 
+                         ORDER BY v.data DESC LIMIT 20")->fetchAll();
 $kpis['vendas_recentes'] = $recentes;
 
 echo json_encode($kpis);

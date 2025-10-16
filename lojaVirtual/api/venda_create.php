@@ -6,7 +6,8 @@ header('Content-Type: application/json; charset=utf-8');
 $payload = json_decode(file_get_contents('php://input'), true);
 $itens = $payload['itens'] ?? [];
 $cliente_email = $payload['cliente_email'] ?? null;
-$usuario_id = $_SESSION['usuario_id'] ?? null;
+$cliente_id = $payload['cliente_id'] ?? null;
+$usuario_id = $_SESSION['usuario_id'] ?? $cliente_id;
 
 if (!is_array($itens) || !count($itens)) {
     http_response_code(422);

@@ -1,3 +1,114 @@
+// Variáveis globais
+let allProducts = [];
+let currentProducts = [];
+
+// Função para formatar moeda
+const moeda = (v) => "R$ " + Number(v || 0).toFixed(2).replace(".", ",");
+
+// Carregar produtos do backend
+async function carregarProdutos() {
+    try {
+        const res = await fetch("api/produtos_list.php");
+        allProducts = await res.json();
+        currentProducts = [...allProducts];
+        renderizarProdutos();
+        atualizarContadores();
+    } catch (e) {
+        console.error("Erro ao carregar produtos:", e);
+        showToast("Erro ao carregar produtos", "error", 3000);
+    }
+}
+
+// Renderizar produtos na grid
+function renderizarProdutos(produtos = currentProducts) {
+    const grid = document.querySelector('.produtos-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    
+    produtos.forEach((p, index) => {
+        const foraEstoque = p.estoque <= 0;
+        const preco = p.preco_promocional && p.preco_promocional > 0 ? p.preco_promocional : p.preco;
+        const precoOriginal = p.preco;
+        const temPromocao = p.preco_promocional && p.preco_promocional < p.preco;
+        
+        const card = document.createElement('div');
+        card.className = 'produto-card';
+        card.setAttribute('data-category', p.categoria.toLowerCase());
+        card.setAttribute('data-price', preco);
+        card.setAttribute('data-brand', p.marca || '');
+        
+        let badge = '';
+        if (foraEstoque) {
+            badge = '<div class="produto-badge out-of-stock">Fora de Estoque</div>';
+        } else if (temPromocao) {
+            const desconto = Math.round(((precoOriginal - preco) / precoOriginal) * 100);
+            badge = `<div class="produto-badge sale">-${desconto}%</div>`;
+        }
+        
+        card.innerHTML = `
+            ${badge}
+            <div class="produto-image">
+                <img src="${p.imagem || `https://picsum.photos/400?random=${p.id}`}" alt="${p.nome}">
+                <div class="produto-overlay">
+                    <button class="btn-quick-view">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="produto-info">
+                <h3 class="produto-title">${p.nome}</h3>
+                <p class="produto-category"><i class="fas fa-tag"></i> ${p.categoria}</p>
+                <div class="produto-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>(4.5)</span>
+                </div>
+                <div class="produto-footer">
+                    ${temPromocao ? 
+                        `<div class="price-group">
+                            <span class="produto-price-old">${moeda(precoOriginal)}</span>
+                            <span class="produto-price">${moeda(preco)}</span>
+                        </div>` :
+                        `<span class="produto-price">${moeda(preco)}</span>`
+                    }
+                    ${foraEstoque ? 
+                        `<div class="out-of-stock-message"><i class="fas fa-exclamation-triangle"></i> Produto fora de estoque</div>` :
+                        `<button class="btn-add-cart" onclick="addToCartBacked(${p.id}, '${p.nome.replace(/'/g, "\\'").replace(/"/g, '&quot;')}', ${preco}, '${(p.imagem || '').replace(/'/g, "\\'")}')"> 
+                            <i class="fas fa-cart-plus"></i>
+                        </button>`
+                    }
+                </div>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+    });
+}
+
+// Atualizar contadores de categoria
+function atualizarContadores() {
+    const categoryItems = document.querySelectorAll('.category-item');
+    categoryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        let count = 0;
+        
+        if (category === 'all') {
+            count = allProducts.length;
+        } else {
+            count = allProducts.filter(p => p.categoria.toLowerCase() === category).length;
+        }
+        
+        const countElement = item.querySelector('.count');
+        if (countElement) {
+            countElement.textContent = count;
+        }
+    });
+}
+
 // Toggle Sidebar Mobile
 const btnToggleSidebar = document.querySelector('.btn-toggle-sidebar');
 const sidebar = document.querySelector('.produtos-sidebar');
@@ -16,32 +127,31 @@ if (btnToggleSidebar) {
 }
 
 // Filtro de Categorias
-const categoryItems = document.querySelectorAll('.category-item');
-const produtoCards = document.querySelectorAll('.produto-card');
-
-categoryItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Remover active de todos
-        categoryItems.forEach(cat => cat.classList.remove('active'));
-        item.classList.add('active');
-        
-        const category = item.getAttribute('data-category');
-        
-        produtoCards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-                card.style.display = 'block';
-                card.style.animation = 'fadeIn 0.5s ease';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-        
-        // Atualizar contador
-        const visibleCards = document.querySelectorAll('.produto-card[style*="display: block"]').length;
-        document.querySelector('.produtos-count strong').textContent = visibleCards;
-    });
+document.addEventListener('click', (e) => {
+    const categoryItem = e.target.closest('.category-item');
+    if (!categoryItem) return;
+    
+    e.preventDefault();
+    
+    // Remover active de todos
+    document.querySelectorAll('.category-item').forEach(cat => cat.classList.remove('active'));
+    categoryItem.classList.add('active');
+    
+    const category = categoryItem.getAttribute('data-category');
+    
+    if (category === 'all') {
+        currentProducts = [...allProducts];
+    } else {
+        currentProducts = allProducts.filter(p => p.categoria.toLowerCase() === category);
+    }
+    
+    renderizarProdutos(currentProducts);
+    
+    // Atualizar contador
+    const countElement = document.querySelector('.produtos-count strong');
+    if (countElement) {
+        countElement.textContent = currentProducts.length;
+    }
 });
 
 // Filtro de Preço
@@ -54,19 +164,24 @@ if (btnFilter) {
         const minPrice = parseFloat(minPriceInput.value) || 0;
         const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
         
-        produtoCards.forEach(card => {
+        const cards = document.querySelectorAll('.produto-card');
+        cards.forEach(card => {
             const priceElement = card.querySelector('.produto-price');
-            const priceText = priceElement.textContent.replace('R$', '').replace('.', '').replace(',', '.');
-            const price = parseFloat(priceText);
-            
-            if (price >= minPrice && price <= maxPrice) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
+            if (priceElement) {
+                const priceText = priceElement.textContent.replace('R$', '').replace('.', '').replace(',', '.');
+                const price = parseFloat(priceText);
+                
+                if (price >= minPrice && price <= maxPrice) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
             }
         });
         
-        showNotification('Filtro de preço aplicado!');
+        if (typeof showToast === 'function') {
+            showToast('Filtro de preço aplicado!', 'success', 2000);
+        }
     });
 }
 
@@ -75,9 +190,10 @@ const btnClearFilters = document.querySelector('.btn-clear-filters');
 
 if (btnClearFilters) {
     btnClearFilters.addEventListener('click', () => {
-        // Resetar categoria
+        // Resetar categoria  
+        const categoryItems = document.querySelectorAll('.category-item');
         categoryItems.forEach(cat => cat.classList.remove('active'));
-        categoryItems[0].classList.add('active');
+        if (categoryItems[0]) categoryItems[0].classList.add('active');
         
         // Resetar preços
         if (minPriceInput) minPriceInput.value = '';
@@ -88,13 +204,17 @@ if (btnClearFilters) {
             input.checked = false;
         });
         
-        // Mostrar todos os produtos
-        produtoCards.forEach(card => {
-            card.style.display = 'block';
-        });
+        // Recarregar todos os produtos
+        currentProducts = [...allProducts];
+        renderizarProdutos();
         
-        document.querySelector('.produtos-count strong').textContent = produtoCards.length;
-        showNotification('Filtros limpos!');
+        const countElement = document.querySelector('.produtos-count strong');
+        if (countElement) {
+            countElement.textContent = currentProducts.length;
+        }
+        if (typeof showToast === 'function') {
+            showToast('Filtros limpos!', 'success', 2000);
+        }
     });
 }
 
@@ -104,24 +224,28 @@ const sortSelect = document.querySelector('.sort-select');
 if (sortSelect) {
     sortSelect.addEventListener('change', () => {
         const sortValue = sortSelect.value;
-        const grid = document.querySelector('.produtos-grid');
-        const cards = Array.from(produtoCards);
         
-        cards.sort((a, b) => {
+        // Ordenar os dados do produto
+        currentProducts.sort((a, b) => {
+            const precoA = a.preco_promocional && a.preco_promocional > 0 ? a.preco_promocional : a.preco;
+            const precoB = b.preco_promocional && b.preco_promocional > 0 ? b.preco_promocional : b.preco;
+            
             switch(sortValue) {
                 case 'price-low':
-                    return getPrice(a) - getPrice(b);
+                    return precoA - precoB;
                 case 'price-high':
-                    return getPrice(b) - getPrice(a);
+                    return precoB - precoA;
                 case 'rating':
-                    return getRating(b) - getRating(a);
+                    return 0; // Rating é o mesmo para todos por enquanto
                 default:
                     return 0;
             }
         });
         
-        cards.forEach(card => grid.appendChild(card));
-        showNotification('Produtos ordenados!');
+        renderizarProdutos();
+        if (typeof showToast === 'function') {
+            showToast('Produtos ordenados!', 'success', 2000);
+        }
     });
 }
 
@@ -165,18 +289,13 @@ ratingCheckboxes.forEach(checkbox => {
             .map(cb => parseInt(cb.value));
         
         if (selectedRatings.length === 0) {
-            produtoCards.forEach(card => card.style.display = 'block');
-            return;
+            currentProducts = [...allProducts];
+        } else {
+            // Por enquanto, manter todos os produtos já que não temos rating real
+            currentProducts = [...allProducts];
         }
         
-        produtoCards.forEach(card => {
-            const rating = getRating(card);
-            if (selectedRatings.includes(rating)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+        renderizarProdutos();
     });
 });
 
@@ -190,19 +309,22 @@ brandCheckboxes.forEach(checkbox => {
             .map(cb => cb.value.toLowerCase());
         
         if (selectedBrands.length === 0) {
-            produtoCards.forEach(card => card.style.display = 'block');
-            return;
+            currentProducts = [...allProducts];
+        } else {
+            currentProducts = allProducts.filter(p => {
+                const nome = p.nome.toLowerCase();
+                const marca = (p.marca || '').toLowerCase();
+                return selectedBrands.some(brand => nome.includes(brand) || marca.includes(brand));
+            });
         }
         
-        produtoCards.forEach(card => {
-            const title = card.querySelector('.produto-title').textContent.toLowerCase();
-            const hasBrand = selectedBrands.some(brand => title.includes(brand));
-            
-            if (hasBrand) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+        renderizarProdutos();
     });
+});
+
+// Inicialização quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.produtos-grid')) {
+        carregarProdutos();
+    }
 });

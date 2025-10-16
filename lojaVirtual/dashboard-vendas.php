@@ -7,6 +7,7 @@
     <title>Vendas - Dashboard TechStore</title>
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/dashboard-pages.css">
+    <link rel="stylesheet" href="./css/pagination.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -140,6 +141,10 @@
                         <i class="fas fa-filter"></i>
                         Filtros
                     </button>
+                    <button class="btn-danger" id="btnLimparVendas">
+                        <i class="fas fa-trash-alt"></i>
+                        Limpar Todas as Vendas
+                    </button>
                 </div>
                 <div class="header-right">
                     <select class="filter-select">
@@ -181,23 +186,9 @@
             </div>
 
             <!-- Pagination -->
-            <div class="pagination-container" data-aos="fade-up">
-                <div class="pagination-info">
-                    Mostrando 1-10 de 247 vendas
-                </div>
-                <div class="pagination">
-                    <button class="page-btn" disabled>
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <span>...</span>
-                    <button class="page-btn">25</button>
-                    <button class="page-btn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+            <div class="pagination-container" data-aos="fade-up" id="vendasPaginationContainer">
+                <!-- Paginação dinâmica será inserida via JavaScript -->
+            </div>
             </div>
         </div>
     </main>
@@ -214,35 +205,25 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Cliente</label>
-                            <select class="form-control" required>
-                                <option value="">Selecione o cliente</option>
-                                <option>João Silva</option>
-                                <option>Maria Santos</option>
-                                <option>Pedro Costa</option>
+                            <select name="cliente_id" id="selectCliente" class="form-control" required>
+                                <option value="">Carregando clientes...</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Produto</label>
-                            <select class="form-control" required>
-                                <option value="">Selecione o produto</option>
-                                <option>Notebook Ultra Pro</option>
-                                <option>Smartphone XZ Plus</option>
-                                <option>Fone Wireless Pro</option>
+                            <select name="produto_id" id="selectProduto" class="form-control" required>
+                                <option value="">Carregando produtos...</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Valor</label>
-                            <input type="number" class="form-control" placeholder="R$ 0,00" required>
+                            <label>Quantidade</label>
+                            <input type="number" name="quantidade" class="form-control" min="1" value="1" required>
                         </div>
                         <div class="form-group">
-                            <label>Status</label>
-                            <select class="form-control" required>
-                                <option>Concluído</option>
-                                <option>Pendente</option>
-                                <option>Cancelado</option>
-                            </select>
+                            <label>Valor Unitário</label>
+                            <input type="number" name="valor_unit" id="valorUnit" class="form-control" step="0.01" placeholder="0.00" readonly>
                         </div>
                     </div>
                     <div class="form-group">
@@ -259,7 +240,9 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/toast.js"></script>
     <script src="js/theme-switcher.js"></script>
+    <script src="js/dashboard-vendas-data.js"></script>
     <script src="js/dashboard-vendas.js"></script>
 </body>
 

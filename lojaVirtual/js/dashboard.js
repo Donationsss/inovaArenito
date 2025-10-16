@@ -103,12 +103,15 @@ function updateStats() {
     (v) => v.status === "completed"
   ).length;
 
-  document.getElementById("totalVendas").textContent = totalVendas;
-  document.getElementById("receitaTotal").textContent = `R$ ${receitaTotal
-    .toFixed(2)
-    .replace(".", ",")}`;
-  document.getElementById("totalClientes").textContent = clientes;
-  document.getElementById("produtosVendidos").textContent = produtosVendidos;
+  const totalVendasEl = document.getElementById("totalVendas");
+  const receitaTotalEl = document.getElementById("receitaTotal");
+  const totalClientesEl = document.getElementById("totalClientes");
+  const produtosVendidosEl = document.getElementById("produtosVendidos");
+  
+  if (totalVendasEl) totalVendasEl.textContent = totalVendas;
+  if (receitaTotalEl) receitaTotalEl.textContent = `R$ ${receitaTotal.toFixed(2).replace(".", ",")}`;
+  if (totalClientesEl) totalClientesEl.textContent = clientes;
+  if (produtosVendidosEl) produtosVendidosEl.textContent = produtosVendidos;
 }
 
 // Preencher tabela de vendas
@@ -430,35 +433,45 @@ async function carregarKPIs() {
 }
 
 function montarGraficoVendasMes(series) {
-  const ctx = document.getElementById("vendasMesChart").getContext("2d");
-  if (window._chartVendasMes) window._chartVendasMes.destroy();
-  const labels = series.map((s) => s.dia);
-  const data = series.map((s) => parseFloat(s.valor));
-  window._chartVendasMes = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Faturamento (R$)",
-          data,
-          backgroundColor: "rgba(37,99,235,0.25)",
-          borderColor: "#2563eb",
-          borderWidth: 2,
-          borderRadius: 8,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false, // ocupa o card inteiro
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { beginAtZero: true, ticks: { callback: (v) => "R$ " + v } },
-        x: { grid: { display: false } },
-      },
-    },
+  const container = document.getElementById("vendasMesChart");
+  if (!container) return;
+  
+  // Se não há dados, mostrar mensagem
+  if (!series || series.length === 0) {
+    container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 200px; color: #666; flex-direction: column;"><i class="fas fa-chart-line" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>Nenhuma venda no mês</div>';
+    return;
+  }
+  
+  // Encontrar valor máximo para escala
+  const maxValue = Math.max(...series.map(s => parseFloat(s.valor || 0)));
+  
+  let html = '<div style="display: flex; align-items: end; gap: 0.5rem; padding: 1rem; height: 200px; overflow-x: auto;">';
+  
+  series.forEach(s => {
+    const valor = parseFloat(s.valor || 0);
+    const altura = maxValue > 0 ? (valor / maxValue) * 150 : 0;
+    const dia = new Date(s.dia).getDate();
+    
+    html += `
+      <div style="display: flex; flex-direction: column; align-items: center; min-width: 30px;">
+        <div style="height: 150px; display: flex; align-items: end;">
+          <div style="
+            width: 24px; 
+            height: ${altura}px; 
+            background: linear-gradient(to top, #2563eb, #3b82f6); 
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            min-height: ${valor > 0 ? '3px' : '0'};
+          " title="${dia}/${new Date(s.dia).getMonth() + 1}: R$ ${valor.toFixed(2).replace('.', ',')}"></div>
+        </div>
+        <div style="font-size: 0.7rem; color: #666; margin-top: 0.25rem;">${dia}</div>
+      </div>
+    `;
   });
+  
+  html += '</div>';
+  container.innerHTML = html;
 }
 
 // Call

@@ -14,6 +14,7 @@ $username = $_SESSION['usuario_nome'] ?? 'Usuário';
     <title>Produtos - TechStore</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/produtos.css">
+    <link rel="stylesheet" href="./css/out-of-stock.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -627,6 +628,8 @@ $username = $_SESSION['usuario_nome'] ?? 'Usuário';
     <script src="js/loja-data.js"></script>
     <script src="js/theme-switcher.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/loja-data.js"></script>
     <script src="js/produtos.js"></script>
 </body>
 

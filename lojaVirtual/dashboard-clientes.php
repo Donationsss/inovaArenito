@@ -9,6 +9,7 @@
   <!-- CSS do dashboard -->
   <link rel="stylesheet" href="./css/dashboard.css">
   <link rel="stylesheet" href="./css/dashboard-pages.css">
+  <link rel="stylesheet" href="./css/pagination.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -158,64 +159,10 @@
 
       <!-- Clientes Grid -->
       <div class="clientes-grid" data-aos="fade-up">
-        <div class="cliente-card">
-          <div class="cliente-header">
-            <img src="https://ui-avatars.com/api/?name=João+Silva&background=2563eb&color=fff&size=80" alt="Cliente">
-            <span class="cliente-badge vip">VIP</span>
-          </div>
-          <div class="cliente-info">
-            <h3>João Silva</h3>
-            <p class="cliente-email"><i class="fas fa-envelope"></i> joao.silva@email.com</p>
-            <p class="cliente-phone"><i class="fas fa-phone"></i> (11) 99999-9999</p>
-            <div class="cliente-stats">
-              <div class="stat-item">
-                <span class="label">Compras</span>
-                <span class="value">47</span>
-              </div>
-              <div class="stat-item">
-                <span class="label">Gasto Total</span>
-                <span class="value">R$ 23.450</span>
-              </div>
-            </div>
-            <div class="cliente-actions">
-              <button class="btn-sm btn-primary">
-                <i class="fas fa-eye"></i> Ver Perfil
-              </button>
-              <button class="btn-sm btn-outline">
-                <i class="fas fa-envelope"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="cliente-card">
-          <div class="cliente-header">
-            <img src="https://ui-avatars.com/api/?name=Maria+Santos&background=8b5cf6&color=fff&size=80" alt="Cliente">
-            <span class="cliente-badge vip">VIP</span>
-          </div>
-          <div class="cliente-info">
-            <h3>Maria Santos</h3>
-            <p class="cliente-email"><i class="fas fa-envelope"></i> maria.santos@email.com</p>
-            <p class="cliente-phone"><i class="fas fa-phone"></i> (11) 98888-8888</p>
-            <div class="cliente-stats">
-              <div class="stat-item">
-                <span class="label">Compras</span>
-                <span class="value">52</span>
-              </div>
-              <div class="stat-item">
-                <span class="label">Gasto Total</span>
-                <span class="value">R$ 31.200</span>
-              </div>
-            </div>
-            <div class="cliente-actions">
-              <button class="btn-sm btn-primary">
-                <i class="fas fa-eye"></i> Ver Perfil
-              </button>
-              <button class="btn-sm btn-outline">
-                <i class="fas fa-envelope"></i>
-              </button>
-            </div>
-          </div>
+        <!-- Clientes serão carregados via JavaScript -->
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Carregando clientes...</p>
         </div>
 
         <div class="cliente-card">
@@ -428,9 +375,11 @@
 
   <!-- Libs -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/toast.js"></script>
   <!-- Tema global -->
   <script src="js/theme-switcher.js"></script>
   <!-- Script da página -->
+  <script src="js/dashboard-data.js"></script>
   <script src="js/dashboard-clientes.js"></script>
 </body>
 

@@ -13,7 +13,9 @@ $username = $_SESSION['usuario_nome'] ?? 'Usuário';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Loja Virtual Premium</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/carrinho.css">
+    <link rel="stylesheet" href="./css/out-of-stock.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -126,112 +128,46 @@ $username = $_SESSION['usuario_nome'] ?? 'Usuário';
                 <p class="section-subtitle">Confira nossa seleção especial de produtos</p>
             </div>
 
-            <div class="produtos-grid">
-                <!-- Produto 1 -->
-                <div class="produto-card" data-aos="fade-up">
-                    <div class="produto-badge">Novo</div>
-                    <div class="produto-image">
-                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400" alt="Notebook">
-                        <div class="produto-overlay">
-                            <button class="btn-quick-view">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="produto-info">
-                        <h3 class="produto-title">Notebook Ultra Pro</h3>
-                        <p class="produto-description">Intel i7, 16GB RAM, 512GB SSD</p>
-                        <div class="produto-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(4.5)</span>
-                        </div>
-                        <div class="produto-footer">
-                            <span class="produto-price">R$ 4.999,00</span>
-                            <button class="btn-add-cart"
-                                onclick="addToCart('Notebook Ultra Pro', 4999, 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400')">
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
-                        </div>
-                    </div>
+            <div class="produtos-grid" id="produtos-destaque">
+                <!-- Produtos serão carregados via JavaScript -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Carregando produtos...</p>
                 </div>
-
-                <!-- Produto 2 -->
-                <div class="produto-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="produto-badge sale">-15%</div>
-                    <div class="produto-image">
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" alt="Smartphone">
-                        <div class="produto-overlay">
-                            <button class="btn-quick-view">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="produto-info">
-                        <h3 class="produto-title">Smartphone XZ Plus</h3>
-                        <p class="produto-description">128GB, 6GB RAM, Câmera 48MP</p>
-                        <div class="produto-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(5.0)</span>
-                        </div>
-                        <div class="produto-footer">
-                            <div class="price-group">
-                                <span class="produto-price-old">R$ 2.999,00</span>
-                                <span class="produto-price">R$ 2.549,00</span>
-                            </div>
-                            <button class="btn-add-cart"
-                                onclick="addToCart('Smartphone XZ Plus', 2549, 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400')">
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 3 -->
-                <div class="produto-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="produto-image">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="Fone">
-                        <div class="produto-overlay">
-                            <button class="btn-quick-view">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="produto-info">
-                        <h3 class="produto-title">Fone Wireless Pro</h3>
-                        <p class="produto-description">Cancelamento de ruído, 30h bateria</p>
-                        <div class="produto-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(4.0)</span>
-                        </div>
-                        <div class="produto-footer">
-                            <span class="produto-price">R$ 899,00</span>
-                            <button class="btn-add-cart"
-                                onclick="addToCart('Fone Wireless Pro', 899, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400')">
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
-                        </div>
-                    </div>
+                <div class="produto-overlay">
+                    <button class="btn-quick-view">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
             </div>
-
-            <div class="ver-mais-container" data-aos="fade-up">
-                <a href="produtos.html" class="btn btn-primary btn-large">
-                    Ver Todos os Produtos
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+            <div class="produto-info">
+                <h3 class="produto-title">Fone Wireless Pro</h3>
+                <p class="produto-description">Cancelamento de ruído, 30h bateria</p>
+                <div class="produto-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>(4.0)</span>
+                </div>
+                <div class="produto-footer">
+                    <span class="produto-price">R$ 899,00</span>
+                    <button class="btn-add-cart"
+                        onclick="addToCart('Fone Wireless Pro', 899, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400')">
+                        <i class="fas fa-cart-plus"></i>
+                    </button>
+                </div>
             </div>
+        </div>
+        </div>
+
+        <div class="ver-mais-container" data-aos="fade-up">
+            <a href="produtos.html" class="btn btn-primary btn-large">
+                Ver Todos os Produtos
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
         </div>
     </section>
 
@@ -344,7 +280,10 @@ $username = $_SESSION['usuario_nome'] ?? 'Usuário';
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/toast.js"></script>
     <script src="js/loja-data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/home-produtos.js"></script>
     <script src="js/theme-switcher.js"></script>
     <script src="js/main.js"></script>
 </body>

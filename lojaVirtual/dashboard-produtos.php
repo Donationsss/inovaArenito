@@ -156,41 +156,11 @@
             </div>
 
             <!-- Products Grid -->
-            <div class="products-grid" data-aos="fade-up">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" alt="Produto">
-                        <span class="stock-badge in-stock">Em Estoque</span>
-                    </div>
-                    <div class="product-info">
-                        <h3>Notebook Ultra Pro</h3>
-                        <p class="product-category"><i class="fas fa-tag"></i> Notebooks</p>
-                        <div class="product-stats">
-                            <div class="stat">
-                                <span class="label">Preço:</span>
-                                <span class="value">R$ 4.999,00</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Estoque:</span>
-                                <span class="value">45 unid.</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Vendas:</span>
-                                <span class="value">127</span>
-                            </div>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn-icon-sm" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn-icon-sm" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn-icon-sm danger" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
+            <div class="products-grid dashboard-products-grid" data-aos="fade-up">
+                <!-- Produtos serão carregados via JavaScript -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Carregando produtos...</p>
                 </div>
 
                 <div class="product-card">
@@ -408,41 +378,42 @@
                     <div class="form-row">
                         <div class="form-group col-8">
                             <label>Nome do Produto *</label>
-                            <input type="text" class="form-control" placeholder="Ex: Notebook Ultra Pro" required>
+                            <input type="text" name="nome" class="form-control" placeholder="Ex: Notebook Ultra Pro" required>
                         </div>
                         <div class="form-group col-4">
                             <label>SKU</label>
-                            <input type="text" class="form-control" placeholder="Ex: NB-001">
+                            <input type="text" name="sku" class="form-control" placeholder="Ex: NB-001">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-6">
                             <label>Categoria *</label>
-                            <select class="form-control" required>
+                            <select name="categoria" class="form-control" required>
                                 <option value="">Selecione</option>
-                                <option>Hardware</option>
-                                <option>Periféricos</option>
-                                <option>Notebooks</option>
-                                <option>Smartphones</option>
+                                <option value="hardware">Hardware</option>
+                                <option value="perifericos">Periféricos</option>
+                                <option value="notebooks">Notebooks</option>
+                                <option value="smartphones">Smartphones</option>
+                                <option value="tablets">Tablets</option>
                             </select>
                         </div>
                         <div class="form-group col-6">
                             <label>Marca</label>
-                            <input type="text" class="form-control" placeholder="Ex: Dell">
+                            <input type="text" name="marca" class="form-control" placeholder="Ex: Dell">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label>Preço *</label>
-                            <input type="number" class="form-control" placeholder="R$ 0,00" required>
+                            <input type="number" name="preco" step="0.01" class="form-control" placeholder="0.00" required>
                         </div>
                         <div class="form-group col-4">
                             <label>Preço Promocional</label>
-                            <input type="number" class="form-control" placeholder="R$ 0,00">
+                            <input type="number" name="preco_promocional" step="0.01" class="form-control" placeholder="0.00">
                         </div>
                         <div class="form-group col-4">
                             <label>Estoque *</label>
-                            <input type="number" class="form-control" placeholder="0" required>
+                            <input type="number" name="estoque" class="form-control" placeholder="0" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -450,12 +421,9 @@
                         <textarea class="form-control" rows="4" placeholder="Descreva o produto..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Imagem do Produto</label>
-                        <div class="file-upload">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Arraste uma imagem ou clique para selecionar</p>
-                            <input type="file" accept="image/*">
-                        </div>
+                        <label>URL da Imagem</label>
+                        <input type="url" name="imagem" class="form-control" placeholder="https://exemplo.com/imagem.jpg">
+                        <small class="form-text text-muted">Ou deixe vazio para usar uma imagem padrão</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-outline" onclick="closeModal('modalNovoProduto')">Cancelar</button>
@@ -467,7 +435,9 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/toast.js"></script>
     <script src="js/theme-switcher.js"></script>
+    <script src="js/dashboard-data.js"></script>
     <script src="js/dashboard-produtos.js"></script>
 </body>
 

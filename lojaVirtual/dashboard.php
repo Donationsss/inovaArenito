@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard - TechStore</title>
-  <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/pagination.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link
     rel="stylesheet"
@@ -100,7 +101,7 @@
             <i class="fas fa-shopping-cart"></i>
           </div>
           <div class="stat-info">
-            <h3 id="totalVendas">0</h3>
+            <h3 id="kpiTotalVendas">0</h3>
             <p>Total de Vendas</p>
             <span class="stat-trend up">
               <i class="fas fa-arrow-up"></i> 12.5%
@@ -113,7 +114,7 @@
             <i class="fas fa-dollar-sign"></i>
           </div>
           <div class="stat-info">
-            <h3 id="receitaTotal">R$ 0,00</h3>
+            <h3 id="kpiReceitaTotal">R$ 0,00</h3>
             <p>Receita Total</p>
             <span class="stat-trend up">
               <i class="fas fa-arrow-up"></i> 8.3%
@@ -126,7 +127,7 @@
             <i class="fas fa-users"></i>
           </div>
           <div class="stat-info">
-            <h3 id="totalClientes">0</h3>
+            <h3 id="kpiClientesAtivos">0</h3>
             <p>Clientes Ativos</p>
             <span class="stat-trend up">
               <i class="fas fa-arrow-up"></i> 5.2%
@@ -139,7 +140,7 @@
             <i class="fas fa-box"></i>
           </div>
           <div class="stat-info">
-            <h3 id="produtosVendidos">0</h3>
+            <h3 id="kpiProdutosVendidos">0</h3>
             <p>Produtos Vendidos</p>
             <span class="stat-trend down">
               <i class="fas fa-arrow-down"></i> 2.1%
@@ -159,8 +160,8 @@
               <option>Últimos 90 dias</option>
             </select>
           </div>
-          <div class="chart-container" style="height: 400px;">
-            <canvas id="salesChart"></canvas>
+          <div class="chart-container" style="height: 400px; padding: 0; margin: 0;">
+            <canvas id="vendasMesChart" style="width: 100%; height: 100%;"></canvas>
           </div>
         </div>
 
@@ -168,67 +169,8 @@
           <div class="card-header">
             <h3>Top Produtos</h3>
           </div>
-          <div class="top-products">
-            <div class="product-item">
-              <div class="product-info">
-                <span class="rank">#1</span>
-                <span class="name">Notebook Ultra Pro</span>
-              </div>
-              <div class="product-stats">
-                <span class="sales">45 vendas</span>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 90%"></div>
-                </div>
-              </div>
-            </div>
-            <div class="product-item">
-              <div class="product-info">
-                <span class="rank">#2</span>
-                <span class="name">Smartphone XZ Plus</span>
-              </div>
-              <div class="product-stats">
-                <span class="sales">38 vendas</span>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 76%"></div>
-                </div>
-              </div>
-            </div>
-            <div class="product-item">
-              <div class="product-info">
-                <span class="rank">#3</span>
-                <span class="name">Notebook Gamer X</span>
-              </div>
-              <div class="product-stats">
-                <span class="sales">32 vendas</span>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 64%"></div>
-                </div>
-              </div>
-            </div>
-            <div class="product-item">
-              <div class="product-info">
-                <span class="rank">#4</span>
-                <span class="name">Smartwatch Elite</span>
-              </div>
-              <div class="product-stats">
-                <span class="sales">28 vendas</span>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 56%"></div>
-                </div>
-              </div>
-            </div>
-            <div class="product-item">
-              <div class="product-info">
-                <span class="rank">#5</span>
-                <span class="name">Fone Wireless Pro</span>
-              </div>
-              <div class="product-stats">
-                <span class="sales">24 vendas</span>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 48%"></div>
-                </div>
-              </div>
-            </div>
+          <div class="top-products" id="topProdutos">
+            <!-- Top produtos serão carregados via JavaScript -->
           </div>
         </div>
       </div>
@@ -252,13 +194,15 @@
                 <th>Data</th>
                 <th>Valor</th>
                 <th>Status</th>
-                <th>Ações</th>
               </tr>
             </thead>
-            <tbody id="salesTableBody">
+            <tbody id="tableVendasRecentes">
               <!-- Vendas serão inseridas aqui via JavaScript -->
             </tbody>
           </table>
+        </div>
+        <div class="table-pagination" id="vendasPagination">
+          <!-- Paginação será inserida via JavaScript -->
         </div>
       </div>
     </div>

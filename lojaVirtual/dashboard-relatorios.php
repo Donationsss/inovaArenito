@@ -239,47 +239,8 @@
                                 <th>Tendência</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Notebook Ultra Pro</strong></td>
-                                <td>Notebooks</td>
-                                <td>127</td>
-                                <td>R$ 634.873,00</td>
-                                <td><span class="badge-success">28%</span></td>
-                                <td><i class="fas fa-arrow-up text-success"></i> +15%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Smartphone XZ Plus</strong></td>
-                                <td>Smartphones</td>
-                                <td>203</td>
-                                <td>R$ 517.447,00</td>
-                                <td><span class="badge-success">32%</span></td>
-                                <td><i class="fas fa-arrow-up text-success"></i> +22%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Fone Wireless Pro</strong></td>
-                                <td>Periféricos</td>
-                                <td>156</td>
-                                <td>R$ 140.244,00</td>
-                                <td><span class="badge-warning">18%</span></td>
-                                <td><i class="fas fa-minus text-warning"></i> 0%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Notebook Gamer X</strong></td>
-                                <td>Notebooks</td>
-                                <td>98</td>
-                                <td>R$ 774.102,00</td>
-                                <td><span class="badge-success">35%</span></td>
-                                <td><i class="fas fa-arrow-down text-danger"></i> -8%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Smartwatch Elite</strong></td>
-                                <td>Periféricos</td>
-                                <td>89</td>
-                                <td>R$ 106.711,00</td>
-                                <td><span class="badge-success">25%</span></td>
-                                <td><i class="fas fa-arrow-up text-success"></i> +12%</td>
-                            </tr>
+                        <tbody id="performanceTableBody">
+                            <!-- Dados serão carregados via JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -289,7 +250,9 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/toast.js"></script>
     <script src="js/theme-switcher.js"></script>
+    <script src="js/relatorios-data.js"></script>
     <script src="js/dashboard-relatorios.js"></script>
 </body>
 
