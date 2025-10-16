@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Chart.js Simples</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .chart-container {
+            width: 400px;
+            height: 300px;
+            margin: 20px 0;
+            border: 2px solid #007bff;
+        }
+        #logs {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste Chart.js Simples</h1>
+    
+    <div id="logs">Carregando...\n</div>
+    
+    <div class="chart-container">
+        <canvas id="testChart" width="400" height="300"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const logs = document.getElementById('logs');
+        function log(msg) {
+            logs.textContent += new Date().toLocaleTimeString() + ' - ' + msg + '\n';
+        }
+
+        log('🚀 Iniciando teste...');
+        log('Chart.js disponível: ' + (typeof Chart !== 'undefined' ? 'SIM' : 'NÃO'));
+        
+        if (typeof Chart !== 'undefined') {
+            log('Chart.js versão: ' + Chart.version);
+        }
+
+        const canvas = document.getElementById('testChart');
+        log('Canvas encontrado: ' + (canvas ? 'SIM' : 'NÃO'));
+
+        if (canvas && typeof Chart !== 'undefined') {
+            try {
+                log('🎨 Criando gráfico de teste...');
+                
+                const ctx = canvas.getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                        datasets: [{
+                            label: 'Teste',
+                            data: [12, 19, 3, 5, 2],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                
+                log('✅ Gráfico criado com sucesso!');
+                
+                // Testar API
+                log('🌐 Testando API de faturamento...');
+                fetch('api/faturamento_mensal.php?year=2025')
+                    .then(response => {
+                        log('API resposta: HTTP ' + response.status);
+                        return response.text();
+                    })
+                    .then(text => {
+                        log('API texto: ' + text.substring(0, 100) + '...');
+                        try {
+                            const data = JSON.parse(text);
+                            log('API JSON válido: ' + (data.success ? 'SIM' : 'NÃO'));
+                        } catch (e) {
+                            log('Erro ao parsear JSON: ' + e.message);
+                        }
+                    })
+                    .catch(err => {
+                        log('Erro na API: ' + err.message);
+                    });
+                
+            } catch (e) {
+                log('❌ Erro ao criar gráfico: ' + e.message);
+            }
+        } else {
+            log('❌ Não foi possível criar gráfico (Chart.js ou canvas não disponível)');
+        }
+    </script>
+</body>
+</html>

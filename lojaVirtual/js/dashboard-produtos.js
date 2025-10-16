@@ -36,16 +36,7 @@ if (upload) {
   });
 }
 
-// Salvar produto (apenas mock local)
-const formNovoProduto = document.getElementById("formNovoProduto");
-if (formNovoProduto) {
-  formNovoProduto.addEventListener("submit", (e) => {
-    e.preventDefault();
-    closeModal("modalNovoProduto");
-    showToast("Produto cadastrado com sucesso!");
-    formNovoProduto.reset();
-  });
-}
+// Event listener removido - estava conflitando com o listener real
 
 function showToast(msg) {
   const el = document.createElement("div");
@@ -69,23 +60,110 @@ function showToast(msg) {
   setTimeout(() => el.remove(), 3000);
 }
 
-document
-  .getElementById("formNovoProduto")
-  ?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    const res = await fetch("api/produto_create.php", {
-      method: "POST",
-      body: fd,
-    });
-    if (res.ok) {
-      showToast("Produto criado!", "success", 3000);
-      listarProdutosDashboard();
-      e.target.reset();
-    } else {
-      showToast("Erro ao criar produto", "error", 3000);
+// ===== IMAGE UPLOAD FUNCTIONALITY =====
+
+// Toggle between URL and file input
+document.addEventListener('DOMContentLoaded', function() {
+    const imageUrlRadio = document.getElementById('imageUrl');
+    const imageFileRadio = document.getElementById('imageFile');
+    const urlInput = document.getElementById('urlInput');
+    const fileInput = document.getElementById('fileInput');
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const imagemFile = document.getElementById('imagemFile');
+    const filePreview = document.getElementById('filePreview');
+    const fileUploadContent = document.querySelector('.file-upload-content');
+    const removeFileBtn = document.getElementById('removeFile');
+    
+    if (imageUrlRadio && imageFileRadio) {
+        imageUrlRadio.addEventListener('change', function() {
+            if (this.checked) {
+                urlInput.style.display = 'block';
+                fileInput.style.display = 'none';
+                clearFileUpload();
+            }
+        });
+        
+        imageFileRadio.addEventListener('change', function() {
+            if (this.checked) {
+                urlInput.style.display = 'none';
+                fileInput.style.display = 'block';
+            }
+        });
     }
-  });
+    
+    // File upload area click
+    if (fileUploadArea && imagemFile) {
+        fileUploadArea.addEventListener('click', function() {
+            imagemFile.click();
+        });
+        
+        // Drag and drop
+        fileUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+        
+        fileUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+        
+        fileUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect(files[0]);
+            }
+        });
+        
+        // File input change
+        imagemFile.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+    }
+    
+    // Remove file button
+    if (removeFileBtn) {
+        removeFileBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            clearFileUpload();
+        });
+    }
+    
+    function handleFileSelect(file) {
+        // Validate file
+        if (!file.type.startsWith('image/')) {
+            showToast('Por favor, selecione apenas arquivos de imagem', 'error', 3000);
+            return;
+        }
+        
+        if (file.size > 5 * 1024 * 1024) { // 5MB
+            showToast('Arquivo muito grande. Máximo 5MB', 'error', 3000);
+            return;
+        }
+        
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('previewImage').src = e.target.result;
+            document.getElementById('fileName').textContent = file.name;
+            fileUploadContent.style.display = 'none';
+            filePreview.style.display = 'flex';
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    function clearFileUpload() {
+        if (imagemFile) imagemFile.value = '';
+        if (filePreview) filePreview.style.display = 'none';
+        if (fileUploadContent) fileUploadContent.style.display = 'block';
+    }
+});
+
+// Event listener removido - usando o do dashboard-data.js para evitar duplicação
 
 async function atualizarEstoque(id, novoEstoque) {
   const fd = new FormData();

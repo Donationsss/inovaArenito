@@ -252,8 +252,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/toast.js"></script>
     <script src="js/theme-switcher.js"></script>
+    <script>AOS.init();</script> <!-- Inicializar AOS -->
     <script src="js/relatorios-data.js"></script>
-    <script src="js/dashboard-relatorios.js"></script>
+    <!-- <script src="js/dashboard-relatorios.js"></script> Comentado - conflita com relatorios-data.js -->
 </body>
 
 </html>

@@ -20,7 +20,7 @@ if ($user && password_verify($password, $user['password'])) {
         setcookie("usuario_id", $user['id'], time() + 60 * 60 * 24 * 30, "/");
     }
     if ($user['is_admin']) {
-        header("Location: dashboard.html");
+        header("Location: dashboard.php");
     } else {
         header("Location: index.php");
     }

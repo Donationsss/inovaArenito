@@ -153,18 +153,102 @@
     if (!form) return;
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const fd = new FormData(form);
+      
       try {
+        let imageUrl = '';
+        
+        // Verificar qual tipo de imagem foi selecionado
+        const imageType = form.querySelector('input[name="image_type"]:checked')?.value;
+        
+        if (imageType === 'file') {
+          // Upload do arquivo primeiro
+          const imageFile = form.querySelector('input[name="imagem_file"]').files[0];
+          if (imageFile) {
+            const uploadFormData = new FormData();
+            uploadFormData.append('image', imageFile);
+            
+            const uploadRes = await fetch('api/upload_image.php', {
+              method: 'POST',
+              body: uploadFormData
+            });
+            
+            if (!uploadRes.ok) {
+              const errorText = await uploadRes.text();
+              let errorMsg = "Erro ao fazer upload da imagem";
+              
+              try {
+                const errorJson = JSON.parse(errorText);
+                if (errorJson.error) {
+                  errorMsg = errorJson.error;
+                }
+              } catch (e) {
+                errorMsg = errorText || "Erro desconhecido no upload";
+              }
+              
+              throw new Error(errorMsg);
+            }
+            
+            const uploadResult = await uploadRes.json();
+            imageUrl = uploadResult.image_url;
+          }
+        } else {
+          // Usar URL fornecida
+          imageUrl = form.querySelector('input[name="imagem_url"]').value || '';
+        }
+        
+        // Criar FormData para o produto
+        const fd = new FormData();
+        fd.append('nome', form.querySelector('input[name="nome"]').value);
+        fd.append('categoria', form.querySelector('select[name="categoria"]').value);
+        fd.append('marca', form.querySelector('input[name="marca"]').value);
+        fd.append('preco', form.querySelector('input[name="preco"]').value);
+        fd.append('preco_promocional', form.querySelector('input[name="preco_promocional"]').value);
+        fd.append('estoque', form.querySelector('input[name="estoque"]').value);
+        fd.append('imagem', imageUrl);
+        
         const res = await fetch("api/produto_create.php", {
           method: "POST",
           body: fd,
         });
-        if (!res.ok) throw new Error(await res.text());
-        showToast("Produto criado", "success", 3000);
+        
+        if (!res.ok) {
+          const errorText = await res.text();
+          let errorMsg = "Erro ao criar produto";
+          
+          try {
+            const errorJson = JSON.parse(errorText);
+            if (errorJson.error) {
+              errorMsg = errorJson.error;
+            }
+          } catch (e) {
+            errorMsg = errorText || "Erro desconhecido";
+          }
+          
+          throw new Error(errorMsg);
+        }
+        
+        showToast("Produto criado com sucesso!", "success", 3000);
         form.reset();
+        
+        // Reset do componente de imagem
+        const urlInput = document.getElementById('urlInput');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        const fileUploadContent = document.querySelector('.file-upload-content');
+        const imageUrlRadio = document.getElementById('imageUrl');
+        
+        if (imageUrlRadio) imageUrlRadio.checked = true;
+        if (urlInput) urlInput.style.display = 'block';
+        if (fileInput) fileInput.style.display = 'none';
+        if (filePreview) filePreview.style.display = 'none';
+        if (fileUploadContent) fileUploadContent.style.display = 'block';
+        
         listarProdutosDashboard();
+        if (typeof closeModal === 'function') {
+          closeModal('modalNovoProduto');
+        }
       } catch (err) {
-        showToast("Erro ao criar produto", "error", 3000);
+        showToast(err.message, "error", 5000);
       }
     });
   }

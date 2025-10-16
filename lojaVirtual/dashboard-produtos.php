@@ -7,6 +7,7 @@
     <title>Produtos - Dashboard TechStore</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/dashboard-pages.css">
+    <link rel="stylesheet" href="./css/pagination.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -421,9 +422,38 @@
                         <textarea class="form-control" rows="4" placeholder="Descreva o produto..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label>URL da Imagem</label>
-                        <input type="url" name="imagem" class="form-control" placeholder="https://exemplo.com/imagem.jpg">
-                        <small class="form-text text-muted">Ou deixe vazio para usar uma imagem padrão</small>
+                        <label>Imagem do Produto</label>
+                        <div class="image-upload-options">
+                            <div class="upload-option">
+                                <input type="radio" id="imageUrl" name="image_type" value="url" checked>
+                                <label for="imageUrl">URL da Imagem</label>
+                            </div>
+                            <div class="upload-option">
+                                <input type="radio" id="imageFile" name="image_type" value="file">
+                                <label for="imageFile">Enviar do PC</label>
+                            </div>
+                        </div>
+                        
+                        <div id="urlInput" class="image-input-group">
+                            <input type="url" name="imagem_url" class="form-control" placeholder="https://exemplo.com/imagem.jpg">
+                            <small class="form-text text-muted">Cole o link da imagem aqui</small>
+                        </div>
+                        
+                        <div id="fileInput" class="image-input-group" style="display: none;">
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <input type="file" name="imagem_file" id="imagemFile" accept="image/*" style="display: none;">
+                                <div class="file-upload-content">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Clique aqui ou arraste uma imagem</p>
+                                    <small>PNG, JPG, JPEG até 5MB</small>
+                                </div>
+                                <div class="file-preview" id="filePreview" style="display: none;">
+                                    <img id="previewImage" src="" alt="Preview">
+                                    <p id="fileName"></p>
+                                    <button type="button" class="btn-remove" id="removeFile">×</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-outline" onclick="closeModal('modalNovoProduto')">Cancelar</button>

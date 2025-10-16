@@ -1,8 +1,10 @@
 <?php
 require_once "../db.php";
 session_start();
+
 if (empty($_SESSION['is_admin'])) {
     http_response_code(403);
+    echo json_encode(["error" => "Acesso negado. Usuário não é administrador"]);
     exit;
 }
 
@@ -14,9 +16,21 @@ $preco_promocional = strlen($_POST['preco_promocional'] ?? '') ? (float)$_POST['
 $estoque = (int)($_POST['estoque'] ?? 0);
 $imagem = trim($_POST['imagem'] ?? '');
 
-if ($nome === '' || $categoria === '' || $preco <= 0) {
+if ($nome === '') {
     http_response_code(422);
-    echo "Dados inválidos";
+    echo json_encode(["error" => "Nome do produto é obrigatório"]);
+    exit;
+}
+
+if ($categoria === '') {
+    http_response_code(422);
+    echo json_encode(["error" => "Categoria é obrigatória"]);
+    exit;
+}
+
+if ($preco <= 0) {
+    http_response_code(422);
+    echo json_encode(["error" => "Preço deve ser maior que zero"]);
     exit;
 }
 

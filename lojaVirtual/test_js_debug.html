@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug JavaScript - Relatórios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .debug-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .log-item {
+            padding: 8px;
+            margin: 4px 0;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .success {
+            border-left-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 10px;
+            max-width: 400px;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-box">
+        <h2>🔍 Debug - Dashboard Relatórios</h2>
+        <div id="debugLogs"></div>
+    </div>
+
+    <div class="debug-box">
+        <h3>Teste de Elementos Canvas</h3>
+        <canvas id="faturamentoChart" width="400" height="200"></canvas>
+        <canvas id="categoriaChart" width="300" height="200"></canvas>
+        <canvas id="pagamentoChart" width="300" height="200"></canvas>
+        
+        <div>
+            <h4>Performance de Produtos</h4>
+            <table style="border-collapse: collapse; width: 100%;">
+                <thead>
+                    <tr style="background: #f8f9fa;">
+                        <th style="border: 1px solid #ddd; padding: 8px;">Produto</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Categoria</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Vendas</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Receita</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Margem</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Tendência</th>
+                    </tr>
+                </thead>
+                <tbody id="performanceTableBody">
+                    <!-- Dados serão carregados via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Interceptar console.log e console.error para mostrar na página
+        const debugLogs = document.getElementById('debugLogs');
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        function addLog(message, type = 'info') {
+            const logItem = document.createElement('div');
+            logItem.className = `log-item ${type}`;
+            logItem.textContent = new Date().toLocaleTimeString() + ' - ' + message;
+            debugLogs.appendChild(logItem);
+            debugLogs.scrollTop = debugLogs.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog(args.join(' '), 'info');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog('ERROR: ' + args.join(' '), 'error');
+        };
+
+        // Verificações iniciais
+        addLog('🚀 Página de debug carregada!');
+        addLog('Chart.js disponível: ' + (typeof Chart !== 'undefined' ? 'SIM' : 'NÃO'));
+        
+        if (typeof Chart !== 'undefined') {
+            addLog('Chart.js versão: ' + Chart.version);
+        }
+        
+        // Verificar elementos canvas
+        const canvases = ['faturamentoChart', 'categoriaChart', 'pagamentoChart'];
+        canvases.forEach(id => {
+            const canvas = document.getElementById(id);
+            addLog(`Canvas ${id}: ${canvas ? 'ENCONTRADO' : 'NÃO ENCONTRADO'}`);
+        });
+        
+        // Verificar tabela
+        const table = document.getElementById('performanceTableBody');
+        addLog(`Tabela performanceTableBody: ${table ? 'ENCONTRADA' : 'NÃO ENCONTRADA'}`);
+    </script>
+    
+    <!-- Carregar o script de relatórios -->
+    <script src="js/relatorios-data.js"></script>
+    
+    <script>
+        // Aguardar um pouco e fazer teste manual das APIs
+        setTimeout(() => {
+            addLog('🧪 Testando APIs manualmente...');
+            
+            // Teste API faturamento
+            fetch('api/faturamento_mensal.php?year=2025')
+                .then(response => {
+                    addLog(`API faturamento: HTTP ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    addLog(`API faturamento: ${data.success ? 'SUCESSO' : 'ERRO'}`);
+                    if (data.data) {
+                        const totalMeses = data.data.length;
+                        const mesComDados = data.data.filter(m => m.faturamento > 0).length;
+                        addLog(`Dados: ${totalMeses} meses, ${mesComDados} com faturamento`);
+                    }
+                })
+                .catch(err => {
+                    addLog(`Erro na API faturamento: ${err.message}`);
+                });
+            
+            // Teste API vendas por categoria
+            fetch('api/vendas_por_categoria.php?periodo=30')
+                .then(response => {
+                    addLog(`API categorias: HTTP ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    addLog(`API categorias: ${data.success ? 'SUCESSO' : 'ERRO'}`);
+                    if (data.data) {
+                        addLog(`Categorias encontradas: ${data.data.length}`);
+                    }
+                })
+                .catch(err => {
+                    addLog(`Erro na API categorias: ${err.message}`);
+                });
+            
+            // Teste API performance
+            fetch('api/performance_produtos.php?periodo=30&limit=10')
+                .then(response => {
+                    addLog(`API performance: HTTP ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    addLog(`API performance: ${data.success ? 'SUCESSO' : 'ERRO'}`);
+                    if (data.data) {
+                        addLog(`Produtos encontrados: ${data.data.length}`);
+                    }
+                })
+                .catch(err => {
+                    addLog(`Erro na API performance: ${err.message}`);
+                });
+            
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,166 +1,382 @@
 // js/relatorios-data.js
-// Carrega dados dinâmicos para página de relatórios - VERSÃO FUNCIONAL
+// Carrega dados dinâmicos para página de relatórios com Chart.js
+
+console.log('🚀 relatorios-data.js carregado!');
 
 (function () {
-  const moeda = (v) => "R$ " + Number(v || 0).toFixed(2).replace(".", ",");
-  let relatoriosData = {};
+  const moeda = (v) => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  let faturamentoChart = null;
+  let categoriaChart = null;
+  let pagamentoChart = null;
 
-  // Carregar dados dos relatórios
+  // Carregar e renderizar todos os gráficos
   async function carregarRelatorios() {
+    console.log('🚀 Iniciando carregamento dos relatórios...');
+    
     try {
-      console.log("🔄 Iniciando carregamento dos relatórios...");
+      // Carregar um por vez para facilitar debug
+      await carregarFaturamentoMensal();
+      console.log('✅ Faturamento mensal carregado');
       
-      const res = await fetch("api/relatorios_data.php");
-      console.log("📡 Response status:", res.status);
+      await carregarVendasPorCategoria();
+      console.log('✅ Vendas por categoria carregadas');
       
-      const text = await res.text();
-      console.log("📄 Response text (primeiros 200 chars):", text.substring(0, 200));
+      await carregarPerformanceProdutos();
+      console.log('✅ Performance dos produtos carregada');
       
-      relatoriosData = JSON.parse(text);
-      console.log("✅ Dados carregados:", relatoriosData);
+      renderizarGraficoPagamentos(); // Mock
+      console.log('✅ Gráfico de pagamentos renderizado');
       
-      if (relatoriosData.error) {
-        throw new Error(relatoriosData.error);
-      }
-      
-      renderizarGraficoFaturamento();
-      renderizarGraficoCategorias();
-      renderizarTabelaPerformance();
-      
+      console.log('✅ Todos os relatórios carregados com sucesso!');
     } catch (e) {
       console.error("❌ Erro ao carregar relatórios:", e);
-      const faturamentoChart = document.getElementById("faturamentoChart");
-      const categoriaChart = document.getElementById("categoriaChart");
-      if (faturamentoChart) faturamentoChart.innerHTML = `<div style="color: red; text-align: center;">ERRO: ${e.message}</div>`;
-      if (categoriaChart) categoriaChart.innerHTML = `<div style="color: red; text-align: center;">ERRO: ${e.message}</div>`;
+      if (typeof showToast !== 'undefined') {
+        showToast('Erro ao carregar relatórios', 'error', 3000);
+      }
     }
   }
 
-  // Renderizar faturamento mensal - CÓDIGO FUNCIONAL
-  function renderizarGraficoFaturamento() {
-    console.log("📈 Renderizando faturamento mensal...");
-    const container = document.getElementById("faturamentoChart");
-    if (!container) return;
-    
-    if (!relatoriosData.faturamento_mensal || relatoriosData.faturamento_mensal.length === 0) {
-      container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">Nenhum dado de faturamento encontrado</div>';
-      return;
-    }
-    
-    let html = '<div style="max-height: 300px; overflow-y: auto;">';
-    
-    relatoriosData.faturamento_mensal.forEach((item, index) => {
-      const valor = parseFloat(item.faturamento || 0);
-      const vendas = parseInt(item.vendas || 0);
-      const [ano, mes] = item.mes.split('-');
-      const mesNome = new Date(ano, mes - 1).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+  // Carregar dados de faturamento mensal
+  async function carregarFaturamentoMensal() {
+    try {
+      const yearSelect = document.querySelector('.select-period');
+      const year = yearSelect ? yearSelect.value : new Date().getFullYear();
       
-      html += `
-        <div style="padding: 10px; margin: 5px 0; background: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">
-          <strong>${mesNome}</strong><br>
-          <span style="color: #666;">${vendas} vendas - ${moeda(valor)}</span>
-        </div>
-      `;
-    });
-    
-    html += '</div>';
-    console.log("✅ Faturamento mensal renderizado:", relatoriosData.faturamento_mensal.length, "itens");
-    container.innerHTML = html;
+      const res = await fetch(`api/faturamento_mensal.php?year=${year}`);
+      
+      if (!res.ok) {
+        throw new Error(`Erro HTTP: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      renderizarGraficoFaturamento(data.data);
+    } catch (error) {
+      console.error('Erro ao carregar faturamento:', error);
+      const canvas = document.getElementById('faturamentoChart');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#999';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Erro ao carregar dados', canvas.width/2, canvas.height/2);
+      }
+    }
   }
 
-  // Renderizar vendas por categoria - CÓDIGO FUNCIONAL
-  function renderizarGraficoCategorias() {
-    console.log("🏷️ Renderizando vendas por categoria...");
-    const container = document.getElementById("categoriaChart");
-    if (!container) return;
+  // Carregar dados de vendas por categoria
+  async function carregarVendasPorCategoria() {
+    try {
+      const res = await fetch('api/vendas_por_categoria.php?periodo=30');
+      
+      if (!res.ok) {
+        throw new Error(`Erro HTTP: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      renderizarGraficoCategorias(data.data);
+    } catch (error) {
+      console.error('Erro ao carregar vendas por categoria:', error);
+      // Renderizar gráfico com dados vazios ou mensagem de erro
+      const canvas = document.getElementById('categoriaChart');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#999';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Erro ao carregar dados', canvas.width/2, canvas.height/2);
+      }
+    }
+  }
+
+  // Carregar dados de performance dos produtos
+  async function carregarPerformanceProdutos() {
+    const res = await fetch('api/performance_produtos.php?periodo=30&limit=10');
+    const data = await res.json();
     
-    if (!relatoriosData.performance_categoria || relatoriosData.performance_categoria.length === 0) {
-      container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">Nenhuma categoria com vendas encontrada</div>';
-      return;
+    if (data.error) {
+      throw new Error(data.error);
     }
     
-    let html = '<div>';
-    const cores = ['#2563eb', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b'];
+    renderizarTabelaPerformance(data.data);
+  }
+
+  // Renderizar gráfico de faturamento mensal com Chart.js
+  function renderizarGraficoFaturamento(dados) {
+    const canvas = document.getElementById('faturamentoChart');
+    if (!canvas) return;
     
-    relatoriosData.performance_categoria.forEach((categoria, index) => {
-      const valor = parseFloat(categoria.receita || 0);
-      const vendas = parseInt(categoria.vendas || 0);
-      const cor = cores[index % cores.length];
-      
-      html += `
-        <div style="display: flex; align-items: center; gap: 15px; padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 6px;">
-          <div style="width: 20px; height: 20px; border-radius: 50%; background-color: ${cor};"></div>
-          <div>
-            <strong>${categoria.categoria}</strong><br>
-            <span style="color: #666;">${vendas} vendas - ${moeda(valor)}</span>
-          </div>
-        </div>
-      `;
+    // Destruir gráfico anterior se existir
+    if (faturamentoChart) {
+      faturamentoChart.destroy();
+      faturamentoChart = null;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    const labels = dados.map(d => d.nome_mes);
+    const values = dados.map(d => d.faturamento);
+    
+    faturamentoChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Faturamento (R$)',
+          data: values,
+          backgroundColor: 'rgba(37, 99, 235, 0.3)',
+          borderColor: 'rgba(37, 99, 235, 1)',
+          borderWidth: 2,
+          borderRadius: 8,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return 'Faturamento: ' + moeda(context.parsed.y);
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return 'R$ ' + value.toLocaleString('pt-BR');
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
     });
+  }
+
+  // Renderizar gráfico de vendas por categoria (Pizza)
+  function renderizarGraficoCategorias(dados) {
+    const canvas = document.getElementById('categoriaChart');
+    if (!canvas) return;
     
-    html += '</div>';
-    console.log("✅ Vendas por categoria renderizadas:", relatoriosData.performance_categoria.length, "itens");
-    container.innerHTML = html;
+    // Destruir gráfico anterior se existir
+    if (categoriaChart) {
+      categoriaChart.destroy();
+      categoriaChart = null;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    const labels = dados.map(d => d.categoria);
+    const values = dados.map(d => d.faturamento_total);
+    const colors = dados.map(d => d.cor);
+    
+    categoriaChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: colors,
+          borderColor: '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              padding: 20,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const percentual = dados[context.dataIndex].percentual;
+                return context.label + ': ' + moeda(context.parsed) + ' (' + percentual + '%)';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Renderizar gráfico de métodos de pagamento (mock)
+  function renderizarGraficoPagamentos() {
+    const canvas = document.getElementById('pagamentoChart');
+    if (!canvas) return;
+    
+    // Destruir gráfico anterior se existir
+    if (pagamentoChart) {
+      pagamentoChart.destroy();
+      pagamentoChart = null;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Dados mock para métodos de pagamento
+    const dadosMock = [
+      { metodo: 'Cartão de Crédito', valor: 45.2, cor: '#2563eb' },
+      { metodo: 'PIX', valor: 32.1, cor: '#10b981' },
+      { metodo: 'Boleto', valor: 15.7, cor: '#f59e0b' },
+      { metodo: 'Cartão de Débito', valor: 7.0, cor: '#8b5cf6' }
+    ];
+    
+    pagamentoChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: dadosMock.map(d => d.metodo),
+        datasets: [{
+          data: dadosMock.map(d => d.valor),
+          backgroundColor: dadosMock.map(d => d.cor),
+          borderColor: '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 15,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed + '%';
+              }
+            }
+          }
+        }
+      }
+    });
   }
 
   // Tabela de performance de produtos
-  function renderizarTabelaPerformance() {
-    const tbody = document.getElementById("performanceTableBody");
-    if (!tbody || !relatoriosData.top_produtos) return;
+  function renderizarTabelaPerformance(dados) {
+    const tbody = document.getElementById('performanceTableBody');
+    if (!tbody) return;
 
-    tbody.innerHTML = "";
+    tbody.innerHTML = '';
 
-    relatoriosData.top_produtos.forEach((produto, index) => {
-      const tr = document.createElement("tr");
+    dados.forEach((produto) => {
+      const tr = document.createElement('tr');
       
-      // Buscar categoria do produto nos dados de performance
-      let categoria = 'N/A';
-      if (relatoriosData.performance_categoria) {
-        const catData = relatoriosData.performance_categoria.find(c => 
-          c.receita > 0 // Encontrar categoria com vendas
-        );
-        if (catData) categoria = catData.categoria;
+      // Ícone de tendência baseado na performance
+      let iconeTendencia = 'fas fa-minus';
+      let corTendencia = 'text-warning';
+      let textoTendencia = 'Estável';
+      
+      if (produto.tendencia === 'alta') {
+        iconeTendencia = 'fas fa-arrow-up';
+        corTendencia = 'text-success';
+        textoTendencia = 'Alta';
+      } else if (produto.tendencia === 'baixa') {
+        iconeTendencia = 'fas fa-arrow-down';
+        corTendencia = 'text-danger';
+        textoTendencia = 'Baixa';
+      } else if (produto.tendencia === 'media') {
+        iconeTendencia = 'fas fa-arrow-right';
+        corTendencia = 'text-info';
+        textoTendencia = 'Média';
       }
       
-      // Calcular margem baseada na receita (mais realista)
-      const receita = parseFloat(produto.receita_total || 0);
-      const margem = receita > 2000 ? 32 : receita > 1000 ? 25 : receita > 500 ? 18 : 15;
-      
-      // Tendência baseada na quantidade vendida
-      const qtdVendida = parseInt(produto.total_vendido || 0);
-      let tendencia = '0%';
-      if (qtdVendida >= 3) tendencia = '+' + (qtdVendida * 5) + '%';
-      else if (qtdVendida === 2) tendencia = '+12%';
-      else if (qtdVendida === 1) tendencia = '+5%';
-      
-      const isPositiva = tendencia.startsWith('+');
-      const isNegativa = tendencia.startsWith('-');
-      
-      let iconeTendencia = 'fas fa-minus text-warning';
-      if (isPositiva) iconeTendencia = 'fas fa-arrow-up text-success';
-      if (isNegativa) iconeTendencia = 'fas fa-arrow-down text-danger';
-
-      let badgeClass = 'badge-warning';
-      if (margem >= 30) badgeClass = 'badge-success';
-      if (margem < 20) badgeClass = 'badge-danger';
+      // Badge da margem
+      let badgeClass = 'status-badge pending';
+      if (produto.margem >= 30) badgeClass = 'status-badge completed';
+      if (produto.margem < 15) badgeClass = 'status-badge cancelled';
 
       tr.innerHTML = `
-        <td><strong>${produto.produto_nome}</strong></td>
-        <td>${categoria}</td>
-        <td>${produto.total_vendido}</td>
+        <td><strong>${produto.produto}</strong></td>
+        <td>${produto.categoria}</td>
+        <td>${produto.total_vendas}</td>
         <td>${moeda(produto.receita_total)}</td>
-        <td><span class="${badgeClass}">${margem}%</span></td>
-        <td><i class="${iconeTendencia}"></i> ${tendencia}</td>
+        <td><span class="${badgeClass}">${produto.margem.toFixed(1)}%</span></td>
+        <td><i class="${iconeTendencia} ${corTendencia}"></i> ${textoTendencia}</td>
       `;
 
       tbody.appendChild(tr);
     });
   }
+  
+  // Event listeners para filtros
+  function bindEventListeners() {
+    // Selector de ano para faturamento
+    const yearSelect = document.querySelector('.select-period');
+    if (yearSelect) {
+      yearSelect.addEventListener('change', () => {
+        carregarFaturamentoMensal();
+      });
+    }
+    
+    // Botão de gerar relatório
+    const btnGerar = document.querySelector('.btn-primary');
+    if (btnGerar && btnGerar.textContent.includes('Gerar')) {
+      btnGerar.addEventListener('click', () => {
+        carregarRelatorios();
+        showToast && showToast('Relatório atualizado!', 'success', 3000);
+      });
+    }
+  }
 
   // Inicializar quando a página carregar
-  document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("faturamentoChart")) {
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('📝 DOM carregado, verificando elementos...');
+    
+    const faturamentoChart = document.getElementById('faturamentoChart');
+    const categoriaChart = document.getElementById('categoriaChart');
+    const pagamentoChart = document.getElementById('pagamentoChart');
+    
+    console.log('Elementos encontrados:', {
+      faturamentoChart: !!faturamentoChart,
+      categoriaChart: !!categoriaChart,
+      pagamentoChart: !!pagamentoChart
+    });
+    
+    // Verificar se Chart.js está carregado
+    if (typeof Chart === 'undefined') {
+      console.error('❌ Chart.js não está carregado!');
+      return;
+    } else {
+      console.log('✅ Chart.js carregado, versão:', Chart.version);
+    }
+    
+    if (faturamentoChart) {
+      console.log('✅ Iniciando carregamento dos relatórios...');
       carregarRelatorios();
+      bindEventListeners();
+    } else {
+      console.error('❌ Canvas faturamentoChart não encontrado!');
     }
   });
 
