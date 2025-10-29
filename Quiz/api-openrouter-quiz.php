@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-$api_key = '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'; // Sua API key OpenRouter
+$api_key = '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'; // Sua API key OpenRouter
 
 $data = json_decode(file_get_contents('php://input'), true);
 $category = $data['category'] ?? 'Conhecimentos gerais';
